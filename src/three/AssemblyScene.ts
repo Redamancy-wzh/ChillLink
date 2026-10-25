@@ -391,8 +391,9 @@ export function createAssemblyScene(host: HTMLDivElement, options: () => SceneOp
       target.set(0, .22, .02)
     } else if (view === 'cargo') {
       // Look over the front rim into the liner so the whole load is visible.
-      destination.set(.36, .72, .74)
-      target.set(0, -.07, .01)
+      // Steep, near-overhead angle so the whole liner floor and its load are visible.
+      destination.set(.1, .86, .4)
+      target.set(0, -.11, .0)
     } else {
       const opened = options().opening > .1
       destination.set(opened ? .9 : .71, opened ? .64 : .49, opened ? 1.1 : .88)
