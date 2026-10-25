@@ -4,3 +4,9 @@ dist
 *.log
 .env
 .env.local
+.env.*
+!.env.example
+coverage
+.vite
+.turbo
+*.tsbuildinfo

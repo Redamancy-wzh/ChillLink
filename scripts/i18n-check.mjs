@@ -1,7 +1,7 @@
-// 校验 7 个语言包的键结构与 zh-CN 完全一致（数组长度也要一致）
+// 校验当前支持的语言包键结构与中文完全一致（数组长度也要一致）
 import { readFileSync } from 'node:fs'
 
-const LANGS = ['zh-CN', 'en', 'ja', 'ko', 'es', 'fr', 'de']
+const LANGS = ['zh-CN', 'en']
 const load = (l) => JSON.parse(readFileSync(new URL(`../src/locales/${l}/common.json`, import.meta.url), 'utf8'))
 
 function shape(v, path = '') {
