@@ -5,16 +5,13 @@ import { syncLangToDOM } from './i18n'
 import Nav from './components/Nav'
 import Hero from './sections/Hero'
 import Specs from './sections/Specs'
-import TechnicalSpecs from './sections/TechnicalSpecs'
 import Model from './sections/Model'
-import Problem from './sections/Problem'
 import Control from './sections/Control'
 import Safety from './sections/Safety'
 import Solutions from './sections/Solutions'
 import Airflow from './sections/Airflow'
 import Compare from './sections/Compare'
 import Contact from './sections/Contact'
-import SceneCarousel from './sections/SceneCarousel'
 import NewsInfo from './sections/NewsInfo'
 import Team from './sections/Team'
 import TeamStory from './sections/TeamStory'
@@ -38,6 +35,7 @@ function Footer() {
             <span className="footer-nav-label">{t('footer.product')}</span>
             <a href="#solutions">{t('nav.solutions')}</a>
             <a href="#scene-carousel">{t('sceneCarousel.eyebrow')}</a>
+            <a href="#technology">{t('nav.technology')}</a>
             <a href="#news-info">{t('newsInfo.eyebrow')}</a>
           </div>
           <div>
@@ -74,16 +72,13 @@ export default function App() {
         <Specs />
         <Solutions />
         <Model />
-        <TechnicalSpecs />
-        <TeamStory />
         <Airflow />
         <Control />
         <Safety />
         <Compare />
-        <SceneCarousel />
-        <Problem />
         <NewsInfo />
         <Team />
+        <TeamStory />
         <Contact />
       </main>
       <Footer />

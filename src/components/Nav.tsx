@@ -63,14 +63,11 @@ export default function Nav() {
           <a href="#solutions" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
             {t('nav.solutions')}
           </a>
-          <a href="#technical-specs" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
-            {t('nav.specifications')}
-          </a>
-          <a href="#airflow" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
-            {t('nav.airflow')}
+          <a href="#technology" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
+            {t('nav.technology')}
           </a>
           <a href="#control" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
-            {t('nav.technology')}
+            {t('nav.control')}
           </a>
           <a href="#safety" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
             {t('nav.safety')}

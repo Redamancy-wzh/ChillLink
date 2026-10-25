@@ -58,8 +58,8 @@
   ],
   "model": {
     "title": "Open it up.",
-    "desc": "Explore the updated control box assembly, inside and out. Drag to orbit and smoothly open the lid. Dual OLEDs, joystick, buttons and lid cooling hardware come from the complete assembly.",
-    "descTouch": "Explore the updated control box assembly, inside and out. Drag to orbit and smoothly open the lid. Dual OLEDs, joystick, buttons and lid cooling hardware come from the complete assembly.",
+    "desc": "Orbit, open the lid, then load different cold-chain goods into the 33 L box to see how they fit. The dual OLEDs, joystick and lid cooling module all come from one complete assembly.",
+    "descTouch": "Orbit, open the lid, then load different cold-chain goods into the 33 L box to see how they fit. The dual OLEDs, joystick and lid cooling module all come from one complete assembly.",
     "note": "V1 concept model: thermal performance, structural strength, airtightness and venting are not yet tested",
     "progress": "Exploded view progress",
     "prev": "Previous layer",
@@ -207,7 +207,7 @@
   },
   "safety": {
     "title": "CO₂ never crosses the food zone.",
-    "body": "The food-air loop, CO₂ exhaust and wiring never meet. CO₂ leaves through an always-open primary channel straight to the outside, never crossing the food duct. Venting continues with the power off or fans stopped, and an always-open backup outlet sits beside it.",
+    "body": "The CO₂ exhaust path is shown above in \"Airflow & exhaust paths\". Here you can see how the warning light and buzzer respond when the sensor reading crosses the threshold.",
     "paths": {
       "food": "Food-air loop",
       "co2": "CO₂ exhaust",
@@ -245,7 +245,17 @@
       "buzzer": "Buzzer"
     },
     "volume": "1 kg of dry ice sublimates into roughly 0.5 m³ of CO₂ (order-of-magnitude estimate, not measured).",
-    "warning": "Do not use in closed vehicles, rooms or poorly ventilated spaces."
+    "warning": "Do not use in closed vehicles, rooms or poorly ventilated spaces.",
+    "switches": {
+      "fans": "Circulation fan running",
+      "primary": "Primary vent clear"
+    },
+    "facts": [
+      "Food air, CO₂ exhaust and wiring never share a path",
+      "Always-open primary vent plus an always-open backup; venting continues with power off or fan stopped",
+      "The ePTFE membrane only keeps out dust and splashes; the dry-ice chamber is never a pressure vessel",
+      "Sensor range 0–5000 ppm; ≥ 2000 ppm for about 3 s raises the alarm"
+    ]
   },
   "compare": {
     "title": "Choose the cold-chain solution that fits your cargo.",
@@ -558,7 +568,11 @@
     "detailMotionBody": "The lid pivots around its rear hinge as both front latches release. Every detail is yours to explore.",
     "touchHint": "One finger to orbit · pinch to zoom · tap to open",
     "control": "Control panel",
-    "cooling": "Cooling module"
+    "cooling": "Cooling module",
+    "lid": "Lid",
+    "lidOpen": "Lid open",
+    "lidClosed": "Lid closed",
+    "autoRotate": "Auto rotate"
   },
   "airflow": {
     "title": "Follow the air. Feel the exchange.",
@@ -593,11 +607,15 @@
     "exchangeBody": "Air passes the metal fins, transferring heat through the container wall to the dry ice.",
     "supplyTitle": "Return cooled air",
     "supplyBody": "Cooled air spreads to both sides, descends along the walls, and recirculates.",
-    "note": "One 120 × 120 mm PWM fan drives side supply and central return airflow. Food-air circulation and CO₂ exhaust are separate. Colors and motion illustrate airflow paths.",
-    "safetyLink": "Explore the separate CO₂ exhaust",
+    "note": "One 120 × 120 mm PWM fan drives side supply and central return. Toggle the fan and primary vent to see the three paths stay separate. Colors and motion illustrate the paths.",
+    "safetyLink": "See the CO₂ alarm demo",
     "fanMode": "Fan layout",
     "singleFan": "Single fan",
-    "dualFan": "One 120 × 120 mm fan"
+    "dualFan": "One 120 × 120 mm fan",
+    "playing": "Animation",
+    "planeMerged": "Airflow & exhaust paths",
+    "ventTitle": "Vent CO₂ separately",
+    "ventBody": "CO₂ from the dry ice leaves through its own duct in the lid, never entering the food-air loop; if the fan stops or the primary vent is blocked, the backup vent stays open."
   },
   "technicalSpecs": {
     "eyebrow": "TECHNICAL PARAMETERS",
@@ -726,35 +744,7 @@
       }
     ],
     "disclosure": "Food air and CO₂ exhaust use separate paths. Keep the dry-ice chamber vented and use in ventilated spaces.",
-    "galleryTitle": "Assembly & use",
-    "gallery": [
-      {
-        "src": "./img/showcase/5790.webp",
-        "alt": "Storage & loading",
-        "label": "Storage & loading"
-      },
-      {
-        "src": "./img/showcase/5777.webp",
-        "alt": "Lid cooling assembly",
-        "label": "Lid cooling assembly"
-      },
-      {
-        "src": "./img/showcase/5806.webp",
-        "alt": "Electronics assembly",
-        "label": "Electronics assembly"
-      }
-    ],
-    "diagramLabels": [
-      "Dry ice",
-      "Aluminium fins",
-      "PWM fan",
-      "33 L storage",
-      "Cool air",
-      "Conduction",
-      "Separate CO₂ exhaust"
-    ],
-    "diagramTitle": "Cooling, heat exchange & airflow",
-    "performanceTitle": "Performance & operation",
+    "performanceTitle": "Show performance & operating parameters",
     "performance": [
       {
         "label": "Capacity",
@@ -806,7 +796,8 @@
         "value": "0–5000 ppm",
         "detail": "Alarm after ≈3 s at ≥2000 ppm"
       }
-    ]
+    ],
+    "sheetTitle": "Key specifications"
   },
   "sceneCarousel": {
     "eyebrow": "APPLICATIONS",
@@ -953,5 +944,44 @@
       }
     ],
     "readSource": "Read source"
+  },
+  "cargo": {
+    "eyebrow": "Load cold-chain goods",
+    "hint": "Pick a load type, then tap single items to show or remove them.",
+    "loading": "Loading…",
+    "setpoint": "Suggested set-point {{temp}} °C",
+    "itemsLabel": "Items in the box",
+    "categories": {
+      "dining": {
+        "name": "Japanese dining",
+        "note": "Sushi, sashimi and wagyu trays laid flat, clear of the lid fan"
+      },
+      "drinks": {
+        "name": "Chilled drinks",
+        "note": "18 bottles / cans in three rows, tall bottles at the sides"
+      },
+      "dessert": {
+        "name": "Frozen desserts",
+        "note": "Gelato cups, mochi gift boxes and chocolate bars"
+      },
+      "medical": {
+        "name": "Medical samples",
+        "note": "Fictional display packaging; real transport follows the relevant rules"
+      }
+    },
+    "items": {
+      "yuzu": "Yuzu sparkling can",
+      "matcha": "Matcha milk bottle",
+      "juice": "Fresh yuzu juice",
+      "gelato": "Vanilla-strawberry gelato",
+      "choco": "Almond chocolate bar",
+      "mochi": "Three-colour mochi box",
+      "vials": "Cold-chain vials & rack",
+      "tubes": "Sample tube rack",
+      "kit": "Biologic kit & pen",
+      "sushi": "Omakase sushi box",
+      "sashimi": "Salmon & tuna sashimi",
+      "wagyu": "Wagyu marbling tray"
+    }
   }
 }

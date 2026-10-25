@@ -145,20 +145,11 @@ input[type='range'] { min-width: 0; height: 32px; accent-color: var(--cryo); cur
 .airflow-step { grid-template-columns: auto minmax(0, 1fr) auto; }
 
 /* Dense comparisons can scroll inside the panel without widening the page. */
-#control, #safety, #compare, #problem { width: min(var(--page-width), calc(100% - var(--page-gutter) * 2)); max-width: none; padding: var(--section-space) 0; margin-inline: auto; }
-#control > :first-child, #safety > :first-child, #problem > :first-child { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
-#control > :first-child > *, #safety > :first-child > *, #problem > :first-child > * { margin: 0; }
-#control > :first-child p, #safety > :first-child p, #problem > :first-child p { color: var(--ink-60); font-size: 1rem; line-height: 1.85; }
-#control > .grid, #safety > .grid { gap: 28px; }
-#control > .grid > *, #safety > .grid > * { min-width: 0; padding: 24px; border: 1px solid var(--line); background: #fff; border-radius: 18px; }
-#control .control-dial { display: grid; grid-template-columns: 1fr auto; gap: 12px; }
-#control .control-dial input { grid-row: 2; grid-column: 1 / -1; width: 100%; }
-#control .control-dial > div { width: auto; }
-#control .control-stats { gap: 12px; }
-#control .control-stats .font-mono { font-size: 1.1rem; white-space: nowrap; }
+#compare, #problem { width: min(var(--page-width), calc(100% - var(--page-gutter) * 2)); max-width: none; padding: var(--section-space) 0; margin-inline: auto; }
+#problem > :first-child { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px; align-items: start; }
+#problem > :first-child > * { margin: 0; }
+#problem > :first-child p { color: var(--ink-60); font-size: 1rem; line-height: 1.85; }
 #safety button { min-height: 44px; }
-#safety .alarm-indicators { flex-wrap: wrap; gap: 12px; }
-#safety .alarm-indicators > .ml-6 { margin-left: 0; }
 #problem .text-5xl { font-size: clamp(1.8rem, 2.8vw, 2.6rem); overflow-wrap: anywhere; }
 .compare-chart-wrap, .compare-cost { padding: 28px; border: 1px solid var(--line); border-radius: 18px; background: #fff; }
 .compare-chart-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 24px; margin-bottom: 24px; }
@@ -306,9 +297,8 @@ input[type='range'] { min-width: 0; height: 32px; accent-color: var(--cryo); cur
   .performance-grid { gap: 24px 18px; }
   .performance-grid strong { font-size: 1rem; }
   .photo-stack { height: 390px; border-radius: 24px; }
-  #control > :first-child, #safety > :first-child, #problem > :first-child { grid-template-columns: 1fr; gap: 20px; }
-  #control > .grid > *, #safety > .grid > * { padding: 20px; }
-  #problem .grid { gap: 28px; }
+  #problem > :first-child { grid-template-columns: 1fr; gap: 20px; }
+    #problem .grid { gap: 28px; }
   .compare-chart-wrap, .compare-cost { padding: 20px; }
   .compare-cost-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .compare-cost-grid article { padding: 16px; }

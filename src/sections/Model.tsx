@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
 import ProductViewer from '../components/ProductViewer'
-import OLEDPair from '../components/OLEDPair'
 
 export default function Model() {
   const { t } = useTranslation()
@@ -12,7 +11,6 @@ export default function Model() {
           <p>{t('model.desc')}</p>
         </div>
         <ProductViewer variant="studio" />
-        <OLEDPair />
       </div>
     </section>
   )

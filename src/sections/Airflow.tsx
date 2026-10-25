@@ -2,6 +2,8 @@ import { Component, lazy, Suspense, useEffect, useMemo, useRef, useState, type R
 import { useTranslation } from 'react-i18next'
 import { useReducedMotion } from '../hooks/useReducedMotion'
 import AirflowDiagram from '../components/AirflowDiagram'
+import PathDiagram from '../components/PathDiagram'
+import NeuToggle from '../components/NeuToggle'
 import type { AirflowOptions, FanMode, FlowFilter } from '../three/airflowPaths'
 import '../styles/airflow.css'
 
@@ -11,6 +13,31 @@ class SceneBoundary extends Component<{ children: ReactNode; fallback: ReactNode
   static getDerivedStateFromError() { return { failed: true } }
   render() { return this.state.failed ? this.props.fallback : this.props.children }
 }
+
+interface SpecRow { label: string; value: string; detail: string; status: string }
+interface SpecGroup { title: string; code: string; rows: SpecRow[] }
+
+/** Compact spec sheet: the four parameter groups side by side, run-time parameters folded below. */
+function SpecSheet() {
+  const { t } = useTranslation()
+  const groups = t('technicalSpecs.groups', { returnObjects: true }) as SpecGroup[]
+  const performance = t('technicalSpecs.performance', { returnObjects: true }) as SpecRow[]
+  return <div id="technical-specs" className="spec-sheet">
+    <div className="spec-sheet-head"><span className="eyebrow">{t('technicalSpecs.eyebrow')}</span><h3>{t('technicalSpecs.sheetTitle')}</h3></div>
+    <div className="spec-sheet-grid">
+      {groups.map(group => <article className="spec-sheet-group" key={group.code}>
+        <header><span>{group.code}</span><h4>{group.title}</h4></header>
+        <dl>{group.rows.map(row => <div key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}</dl>
+      </article>)}
+    </div>
+    <details className="spec-sheet-more">
+      <summary><span>{t('technicalSpecs.performanceTitle')}</span><i aria-hidden="true" /></summary>
+      <dl className="spec-sheet-performance">{performance.map(row => <div key={row.label}><dt>{row.label}</dt><dd><strong>{row.value}</strong><span>{row.detail}</span></dd></div>)}</dl>
+    </details>
+  </div>
+}
+
+/** 02 — How it works: the airflow demonstration and the technical parameters in one section. */
 export default function Airflow() {
   const { t } = useTranslation()
   const reducedMotion = useReducedMotion()
@@ -20,22 +47,27 @@ export default function Airflow() {
   const fanMode: FanMode = 'single'
   const [reset, setReset] = useState(0)
   const [loadScene, setLoadScene] = useState(false)
+  const [fans, setFans] = useState(true)
+  const [primaryOpen, setPrimaryOpen] = useState(true)
+  const scenario = !primaryOpen ? 'blocked' : !fans ? 'fans' : 'normal'
   const [error, setError] = useState(false)
   const section = useRef<HTMLElement>(null)
   const options: AirflowOptions = useMemo(() => ({ playing, speed, filter, reset, reducedMotion, fanMode }), [playing, speed, filter, reset, reducedMotion, fanMode])
   useEffect(() => {
-    const anchorFrame = window.location.hash === '#airflow'
+    const hash = window.location.hash
+    const anchorFrame = hash === '#airflow' || hash === '#technology'
       ? requestAnimationFrame(() => section.current?.scrollIntoView({ block: 'start' })) : 0
     const observer = new IntersectionObserver(entries => { if (entries[0].isIntersecting) { setLoadScene(true); observer.disconnect() } }, { rootMargin: '250px' })
     if (section.current) observer.observe(section.current)
     return () => { observer.disconnect(); cancelAnimationFrame(anchorFrame) }
   }, [])
   const fallback = <div className="airflow-fallback"><AirflowDiagram options={options} /><p role="status">{t('airflow.fallback')}</p></div>
-  return <section id="airflow" className="airflow-section" ref={section}>
+  return <section id="technology" className="airflow-section" ref={section}>
+    <span id="airflow" className="anchor-alias" aria-hidden="true" />
     <div className="content-wrap">
       <div className="airflow-heading">
-        <div><p className="eyebrow">02 / FOLLOW THE AIR</p><h2>{t('airflow.title')}</h2></div>
-        <p>{t('airflow.body')}</p>
+        <div><p className="eyebrow">02 / HOW IT WORKS</p><h2>{t('airflow.title')}</h2></div>
+        <p>{t('technicalSpecs.intro')} {t('airflow.body')}</p>
       </div>
       <div className="airflow-toolbar">
         <div className="airflow-filters" role="group" aria-label={t('airflow.filterLabel')}>
@@ -43,9 +75,7 @@ export default function Airflow() {
         </div>
         <div className="airflow-playback">
           <label><span>{t('airflow.speed')}</span><input aria-label={t('airflow.speed')} type="range" min=".5" max="2" step=".25" value={speed} disabled={reducedMotion} onChange={e => setSpeed(Number(e.target.value))} /><output>{speed.toFixed(2).replace(/0$/, '')}×</output></label>
-          <button type="button" className="airflow-play" disabled={reducedMotion} aria-label={t(playing ? 'airflow.pause' : 'airflow.play')} onClick={() => setPlaying(value => !value)}>
-            <svg viewBox="0 0 20 20" aria-hidden="true">{playing && !reducedMotion ? <path d="M7 5v10M13 5v10" fill="none" stroke="currentColor" strokeWidth="2" /> : <path d="m7 4 9 6-9 6z" fill="currentColor" />}</svg>{t(reducedMotion ? 'airflow.static' : playing ? 'airflow.pause' : 'airflow.play')}
-          </button>
+          <NeuToggle size="sm" checked={playing && !reducedMotion} disabled={reducedMotion} onChange={setPlaying} label={t('airflow.playing')} caption={t(reducedMotion ? 'airflow.static' : 'airflow.playing')} />
         </div>
       </div>
       <div className="airflow-panels">
@@ -59,15 +89,26 @@ export default function Airflow() {
           <p className="airflow-orbit-hint"><span className="viewer-hint-desktop">{t('airflow.orbit')}</span><span className="viewer-hint-touch">{t('airflow.touch')}</span></p>
         </div>
         <div className="airflow-plane-panel">
-          <div className="airflow-panel-title"><div><span>2D</span><h3>{t('airflow.plane')}</h3></div><span className="airflow-section-tag">A — A</span></div>
-          <AirflowDiagram options={options} />
-          <div className="airflow-phase-key"><span><i className="airflow-swatch cold" />{t('airflow.cold')}</span><span><i className="airflow-swatch warm" />{t('airflow.warm')}</span></div>
+          <div className="airflow-panel-title"><div><span>2D</span><h3>{t('airflow.planeMerged')}</h3></div><span className="airflow-section-tag">A — A</span></div>
+          <PathDiagram state={{ fans, primaryOpen }} filter={filter} playing={playing && !reducedMotion} />
+          <div className="plane-legend">
+            <span className="safety-key"><i className="key-food" />{t('airflow.cold')}</span>
+            <span className="safety-key"><i className="key-warm" />{t('airflow.warm')}</span>
+            <span className="safety-key"><i className="key-co2" />{t('safety.paths.co2')}</span>
+            <span className="safety-key"><i className="key-elec" />{t('safety.paths.elec')}</span>
+          </div>
+          <div className="plane-switches" role="group" aria-label={t('safety.scenarioLabel')}>
+            <NeuToggle size="sm" checked={fans} onChange={setFans} label={t('safety.switches.fans')} />
+            <NeuToggle size="sm" checked={primaryOpen} onChange={setPrimaryOpen} label={t('safety.switches.primary')} />
+            <strong>{t(`safety.status.${scenario}`)}</strong>
+          </div>
+          <ol className="airflow-sequence">
+            {['return', 'exchange', 'supply', 'vent'].map((key, index) => <li key={key} className={`airflow-step ${key}`}><span className="airflow-step-number">0{index + 1}</span><div><h3>{t(`airflow.${key}Title`)}</h3><p>{t(`airflow.${key}Body`)}</p></div></li>)}
+          </ol>
         </div>
       </div>
-      <div className="airflow-sequence">
-        {['return', 'exchange', 'supply'].map((key, index) => <article key={key} className={`airflow-step ${key}`}><span className="airflow-step-number">0{index + 1}</span><div><h3>{t(`airflow.${key}Title`)}</h3><p>{t(`airflow.${key}Body`)}</p></div><span className="airflow-step-arrow" aria-hidden="true">{index < 2 ? '↓' : '↻'}</span></article>)}
-      </div>
-      <div className="airflow-footnote"><p>{t('airflow.note')}</p><a href="#safety">{t('airflow.safetyLink')} <span aria-hidden="true">↗</span></a></div>
+      <SpecSheet />
+      <div className="airflow-footnote"><p>{t('airflow.note')} {t('technicalSpecs.disclosure')}</p><a href="#safety">{t('airflow.safetyLink')} <span aria-hidden="true">↗</span></a></div>
     </div>
   </section>
 }

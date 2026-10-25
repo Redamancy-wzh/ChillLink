@@ -40,12 +40,13 @@ function CountUp({
   )
 }
 
-export default function Problem() {
+export default function Problem({ embedded = false }: { embedded?: boolean }) {
   const { t } = useTranslation()
   const stats = t('problem.stats', { returnObjects: true }) as any
 
+  const Tag = embedded ? 'div' : 'section'
   return (
-    <section id="problem" className="max-w-page mx-auto px-6 problem-stats-section">
+    <Tag id="problem" className={embedded ? 'problem-stats-embedded' : 'max-w-page mx-auto px-6 problem-stats-section'}>
       <div className="problem-stats">
         <div>
           <div className="caption">{stats.coldChain.label}</div>
@@ -76,6 +77,6 @@ export default function Problem() {
           <p className="caption italic">{stats.cdc.source}</p>
         </div>
       </div>
-    </section>
+    </Tag>
   )
 }

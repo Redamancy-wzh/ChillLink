@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import { useAppStore } from '../store/useAppStore'
 
-function Screen({ type }: { type: 'control' | 'data' }) {
+export function Screen({ type }: { type: 'control' | 'data' }) {
   const { t } = useTranslation()
   const targetTemp = useAppStore(s => s.targetTemp)
   const avgTemp = useAppStore(s => s.avgTemp)

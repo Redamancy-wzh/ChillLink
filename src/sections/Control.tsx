@@ -3,6 +3,7 @@ import { useAppStore } from '../store/useAppStore'
 import { useEffect, useRef, useState } from 'react'
 import { createPID, resetPID, updatePID } from '../sim/pid'
 import { thermalStep } from '../sim/thermal'
+import { Screen } from '../components/OLEDPair'
 
 export default function Control() {
   const { t } = useTranslation()
@@ -81,121 +82,48 @@ export default function Control() {
   const showConfirmed = Date.now() - confirmedAt < 2000
 
   return (
-    <section id="control" ref={sectionRef} className="max-w-page mx-auto px-6 space-y-8">
-      <div className="space-y-6">
-        <h2>{t('control.title')}</h2>
-        <p className="text-lg leading-relaxed max-w-prose">{t('control.body')}</p>
-      </div>
-
-      <div className="grid lg:grid-cols-2 gap-12">
-        <div className="space-y-6">
-          <div className="control-dial">
-            <label className="text-sm text-ink-60">{t('control.dialLabel')}</label>
-            <input
-              type="range"
-              min={-25}
-              max={10}
-              step={0.5}
-              value={draftTemp}
-              onChange={(e) => handleDialChange(parseFloat(e.target.value))}
-              onMouseUp={handleConfirm}
-              onTouchEnd={handleConfirm}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') handleConfirm()
-              }}
-              className="flex-1"
-              aria-label={t('control.dialLabel')}
-            />
-            <div className="text-2xl font-mono font-semibold w-20 text-right">
-              {draftTemp.toFixed(1)}°C
-            </div>
-          </div>
-          {editing && <p className="text-sm text-ink-60">{t('control.editing')}</p>}
-          {showConfirmed && <p className="text-sm text-ice">{t('control.confirmed')}</p>}
-          <div className="control-stats grid grid-cols-3 gap-6 pt-6 border-t border-line">
-            <div className="space-y-1">
-              <div className="text-xs text-ink-60">{t('control.target')}</div>
-              <div className="text-xl font-mono">{targetTemp.toFixed(1)}°C</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-xs text-ink-60">{t('control.average')}</div>
-              <div className="text-xl font-mono">{avgTemp.toFixed(1)}°C</div>
-            </div>
-            <div className="space-y-1">
-              <div className="text-xs text-ink-60">{t('control.fan')}</div>
-              <div className="text-xl font-mono">{pwm}%</div>
-            </div>
-          </div>
+    <section id="control" ref={sectionRef} className="control-section">
+      <div className="content-wrap">
+        <div className="section-heading section-heading-wide">
+          <div><p className="eyebrow">03 / CONTROL</p><h2>{t('control.title')}</h2></div>
+          <p className="section-heading-copy">{t('control.body')}</p>
         </div>
 
-        <div className="space-y-4">
-          <div className="caption">{t('control.oledTitle')}</div>
-          <div className="grid grid-cols-2 gap-4">
-            <OLEDScreen type="control" />
-            <OLEDScreen type="data" />
+        <div className="control-grid">
+          <div className="control-panel">
+            <div className="control-dial">
+              <label htmlFor="target-dial">{t('control.dialLabel')}</label>
+              <output>{draftTemp > 0 ? '+' : ''}{draftTemp.toFixed(1)}<small>°C</small></output>
+              <input
+                id="target-dial"
+                type="range"
+                min={-25}
+                max={10}
+                step={0.5}
+                value={draftTemp}
+                onChange={(e) => handleDialChange(parseFloat(e.target.value))}
+                onPointerUp={handleConfirm}
+                onKeyUp={(e) => { if (e.key === 'Enter' || e.key.startsWith('Arrow')) handleConfirm() }}
+                style={{ '--range-progress': `${((draftTemp + 25) / 35) * 100}%` } as React.CSSProperties}
+                aria-describedby="target-dial-hint"
+              />
+              <div className="control-dial-scale" aria-hidden="true"><span>−25</span><span>−10</span><span>0</span><span>+10 °C</span></div>
+            </div>
+            <p id="target-dial-hint" className="control-dial-hint">{editing ? t('control.editing') : showConfirmed ? t('control.confirmed') : t('control.keyHint')}</p>
+            <dl className="control-stats">
+              <div><dt>{t('control.target')}</dt><dd>{targetTemp.toFixed(1)}°C</dd></div>
+              <div><dt>{t('control.average')}</dt><dd>{avgTemp.toFixed(1)}°C</dd></div>
+              <div><dt>{t('control.fan')}</dt><dd>{pwm}%<i className="control-pwm" style={{ '--pwm': `${pwm}%` } as React.CSSProperties} /></dd></div>
+            </dl>
           </div>
-          <p className="caption">{t('control.oledCaption')}</p>
+
+          <div className="control-oled">
+            <div className="control-oled-head"><span className="eyebrow">ELECTRONICS / OLED</span><h3>{t('control.oledTitle')}</h3></div>
+            <div className="model-oled-grid"><Screen type="control" /><Screen type="data" /></div>
+            <p className="caption">{t('control.oledCaption')} {t('control.simCaption')}</p>
+          </div>
         </div>
       </div>
-
-      <p className="caption border-l-2 border-ice pl-3">{t('control.simCaption')}</p>
     </section>
-  )
-}
-
-function OLEDScreen({ type }: { type: 'control' | 'data' }) {
-  const { t } = useTranslation()
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const targetTemp = useAppStore((s) => s.targetTemp)
-  const avgTemp = useAppStore((s) => s.avgTemp)
-  const pwm = useAppStore((s) => s.pwm)
-  const co2 = useAppStore((s) => s.co2)
-  const alarm = useAppStore((s) => s.alarm)
-
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext('2d')
-    if (!ctx) return
-
-    ctx.fillStyle = '#000'
-    ctx.fillRect(0, 0, 128, 64)
-    ctx.fillStyle = '#6CC9EE'
-    ctx.font = '8px monospace'
-
-    if (type === 'control') {
-      ctx.fillText('ChillLink / CONTROL', 0, 8)
-      ctx.fillRect(0, 10, 128, 1)
-      ctx.fillText('AVERAGE', 0, 20)
-      ctx.font = '16px monospace'
-      ctx.fillText(`${avgTemp.toFixed(1)}C`, 0, 38)
-      ctx.font = '8px monospace'
-      ctx.fillText(`SET ${targetTemp.toFixed(1)}C`, 0, 50)
-      ctx.fillText(`FAN ${pwm}%`, 78, 50)
-      ctx.fillRect(0, 53, 128, 1)
-      ctx.fillText('MID EDIT  L/R SENSOR', 0, 62)
-    } else {
-      ctx.fillText(alarm ? 'CO2 ALARM / VENT!' : 'Effi-Chillcrate X1', 0, 8)
-      ctx.fillRect(0, 10, 128, 1)
-      ctx.font = '16px monospace'
-      ctx.fillText(`${co2}`, 0, 28)
-      ctx.font = '8px monospace'
-      ctx.fillText('ppm', 54, 28)
-      const s1 = avgTemp + (Math.random() - 0.5) * 0.6
-      const s2 = avgTemp + (Math.random() - 0.5) * 0.6
-      const s3 = avgTemp + (Math.random() - 0.5) * 0.6
-      ctx.fillText(`> S1  ${s1.toFixed(1)} C`, 0, 42)
-      ctx.fillText(`  S2  ${s2.toFixed(1)} C`, 0, 51)
-      ctx.fillText(`  S3  ${s3.toFixed(1)} C`, 0, 60)
-    }
-  }, [type, targetTemp, avgTemp, pwm, co2, alarm])
-
-  return (
-    <div className="bg-black rounded p-2">
-      <canvas ref={canvasRef} width={128} height={64} className="w-full h-auto" />
-      <div className="text-xs text-center text-ink-60 mt-1">
-        {type === 'control' ? t('control.oledControl') : t('control.oledData')}
-      </div>
-    </div>
   )
 }

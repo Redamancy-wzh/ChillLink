@@ -1,117 +1,116 @@
-import { useEffect, useRef } from 'react'
-import { prefersReducedMotion } from '../hooks/useReducedMotion'
+import { useEffect, useId, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 
-type Scenario = 'normal' | 'fans' | 'blocked'
-
-const SAMPLES = 240
-// 原来每帧 +0.0035（按 60 fps 计），改为按时间推进，保持同样速度。
-const SPEED_PER_SEC = 0.0035 * 60
-
-/** 把路径预采样成点表，动画时只查表，不再每帧调用 getPointAtLength（会强制 SVG 布局）。 */
-function sample(path: SVGPathElement | null) {
-  if (!path) return []
-  const len = path.getTotalLength()
-  const pts: { x: number; y: number }[] = []
-  for (let i = 0; i <= SAMPLES; i++) { const p = path.getPointAtLength((i / SAMPLES) * len); pts.push({ x: p.x, y: p.y }) }
-  return pts
+export interface PathState {
+  fans: boolean
+  primaryOpen: boolean
 }
 
-function place(dot: SVGCircleElement | null, pts: { x: number; y: number }[], u: number) {
-  if (!dot || pts.length < 2) return
-  const f = u * SAMPLES
-  const i = Math.floor(f), k = f - i
-  const a = pts[i], b = pts[Math.min(i + 1, SAMPLES)]
-  dot.setAttribute('cx', (a.x + (b.x - a.x) * k).toFixed(2))
-  dot.setAttribute('cy', (a.y + (b.y - a.y) * k).toFixed(2))
-}
+// Food-air loops: cooled air leaves the fins, sinks along both walls and the floor (cold),
+// then rises through the centre back to the fan (warm return).
+const COLD_L = 'M300 186 C270 186 236 182 200 182 L138 182 Q118 182 118 202 L118 318 Q118 338 138 338 L282 338'
+const COLD_R = 'M340 186 C370 186 404 182 440 182 L502 182 Q522 182 522 202 L522 318 Q522 338 502 338 L358 338'
+const WARM_L = 'M282 338 Q304 338 304 316 L304 222 Q304 206 314 196'
+const WARM_R = 'M358 338 Q336 338 336 316 L336 222 Q336 206 326 196'
+const STREAMS = [
+  { path: COLD_L, kind: 'cold', dots: 7, dur: 4.2 }, { path: COLD_R, kind: 'cold', dots: 7, dur: 4.2 },
+  { path: WARM_L, kind: 'warm', dots: 3, dur: 1.6 }, { path: WARM_R, kind: 'warm', dots: 3, dur: 1.6 },
+] as const
+// CO₂ leaves the dry-ice chamber upward through its own sealed duct in the lid.
+const CO2_PRIMARY = 'M352 104 L352 56 Q352 46 362 46 L600 46'
+const CO2_BACKUP = 'M288 104 L288 56 Q288 46 278 46 L40 46'
+const WIRE = 'M496 112 L496 132 Q496 140 504 140 L536 140 L536 300 Q536 306 530 306 L512 306'
 
 /**
- * Cross-section diagram redrawn from the V1 airflow concept, not the render.
- * Food-air loop (ice), CO₂ exhaust (abyss), electrical wiring (ink-30).
+ * Cross-section of the box showing the three separated paths.
+ * Particles use SMIL animateMotion; the whole SVG pauses when it leaves the viewport.
  */
-export default function PathDiagram({ scenario }: { scenario: Scenario }) {
-  const svgRef = useRef<SVGSVGElement>(null)
-  const foodRef = useRef<SVGPathElement>(null)
-  const foodDots = useRef<(SVGCircleElement | null)[]>([])
-  const co2Ref = useRef<SVGPathElement>(null)
-  const co2Dots = useRef<(SVGCircleElement | null)[]>([])
-  const phase = useRef(0)
-
+export default function PathDiagram({ state, filter = 'all', playing = true }: { state: PathState; filter?: 'all' | 'cold' | 'warm'; playing?: boolean }) {
+  const { t } = useTranslation()
+  const svg = useRef<SVGSVGElement>(null)
+  const id = useId().replace(/:/g, '')
   useEffect(() => {
-    const svg = svgRef.current
-    if (!svg) return
-    const foodPts = sample(foodRef.current)
-    const co2Pts = sample(co2Ref.current)
-    const still = scenario === 'fans' || prefersReducedMotion()
-    let frame = 0, last = 0, visible = false
+    const element = svg.current
+    if (!element) return
+    const observer = new IntersectionObserver(([entry]) => { if (entry.isIntersecting && playing) element.unpauseAnimations(); else element.pauseAnimations() })
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [playing])
+  const { fans, primaryOpen } = state
+  const co2Live = primaryOpen ? CO2_PRIMARY : CO2_BACKUP
+  const puffs = (path: string, count: number, dur: number, strong: boolean) => Array.from({ length: count }, (_, i) => {
+    const begin = `${(-i * dur / count).toFixed(2)}s`
+    return <circle key={`${path.length}-${i}`} r="4" fill="#ef8a4a" opacity="0">
+      <animateMotion dur={`${dur}s`} begin={begin} repeatCount="indefinite" path={path} />
+      <animate attributeName="r" values={strong ? '2.5;4;6.5' : '2;3;4.5'} dur={`${dur}s`} begin={begin} repeatCount="indefinite" />
+      <animate attributeName="opacity" values={strong ? '0;.95;.8;0' : '0;.55;.4;0'} keyTimes="0;.15;.8;1" dur={`${dur}s`} begin={begin} repeatCount="indefinite" />
+    </circle>
+  })
+  return <svg ref={svg} className="path-diagram" viewBox="0 0 640 386" role="img" aria-labelledby={`${id}-t`}>
+    <title id={`${id}-t`}>{t('safety.title')}</title>
+    <defs>
+      <linearGradient id={`${id}-wall`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#f4f8fa" /><stop offset="1" stopColor="#e3ecf0" /></linearGradient>
+      <linearGradient id={`${id}-food`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#e6f6fc" /><stop offset="1" stopColor="#cfeaf6" /></linearGradient>
+      <linearGradient id={`${id}-ice`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor="#ffffff" /><stop offset="1" stopColor="#cfe6f0" /></linearGradient>
+      <filter id={`${id}-glow`} x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3" /></filter>
+      <pattern id={`${id}-hatch`} width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0V6" stroke="#c3d3db" strokeWidth="1.2" /></pattern>
+    </defs>
 
-    const draw = () => {
-      const t = phase.current
-      foodDots.current.forEach((dot, i) => place(dot, foodPts, (t + i / 4) % 1))
-      co2Dots.current.forEach((dot, i) => place(dot, co2Pts, (t + i / 3) % 1))
-    }
-    const loop = (now: number) => {
-      if (last) phase.current = (phase.current + Math.min(now - last, 100) / 1000 * SPEED_PER_SEC) % 1
-      last = now
-      draw()
-      frame = requestAnimationFrame(loop)
-    }
-    const stop = () => { cancelAnimationFrame(frame); frame = 0; last = 0 }
-    const start = () => { if (!frame && visible && !still && !document.hidden) frame = requestAnimationFrame(loop) }
+    {/* outside air */}
+    <text x="40" y="30" className="pd-label pd-muted">{t('safety.labels.outside')}</text>
+    <text x="600" y="30" textAnchor="end" className="pd-label pd-muted">{t('safety.labels.outside')}</text>
 
-    draw()
-    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) start(); else stop() })
-    observer.observe(svg)
-    const onVisibility = () => { if (document.hidden) stop(); else start() }
-    document.addEventListener('visibilitychange', onVisibility)
-    return () => { stop(); observer.disconnect(); document.removeEventListener('visibilitychange', onVisibility) }
-  }, [scenario])
+    {/* insulated body + lid */}
+    <rect x="92" y="112" width="456" height="252" rx="22" fill={`url(#${id}-hatch)`} stroke="#9fb6c2" strokeWidth="1.5" />
+    <rect x="108" y="124" width="424" height="226" rx="12" fill={`url(#${id}-food)`} stroke="#a9c6d3" />
+    <rect x="80" y="70" width="480" height="44" rx="12" fill={`url(#${id}-wall)`} stroke="#9fb6c2" strokeWidth="1.5" />
 
-  return (
-    <svg ref={svgRef} viewBox="0 0 360 240" className="w-full h-auto" role="img">
-      {/* Box outline */}
-      <rect x="20" y="60" width="320" height="160" fill="none" stroke="#0C1E2B" strokeOpacity="0.2" />
-      <line x1="20" y1="96" x2="340" y2="96" stroke="#0C1E2B" strokeOpacity="0.2" />
+    {/* goods */}
+    {[150, 214, 400, 462].map((x, i) => <rect key={x} x={x} y={i % 2 ? 300 : 290} width="50" height={i % 2 ? 36 : 46} rx="5" fill="#fff" stroke="#b9d0da" />)}
+    <text x="320" y="377" textAnchor="middle" className="pd-label pd-small pd-muted">{t('airflow.storage')}</text>
 
-      {/* Food zone */}
-      <rect x="30" y="130" width="200" height="80" fill="#6CC9EE" fillOpacity="0.06" />
+    {/* dry-ice chamber: sealed off from the food air, vented upward */}
+    <rect x="262" y="98" width="116" height="52" rx="8" fill="#123445" />
+    {[0, 1, 2, 3].map(i => <rect key={i} x={274 + i * 25} y={112 + (i % 2) * 6} width="18" height="18" rx="3" fill={`url(#${id}-ice)`} opacity=".92" />)}
+    <text x="320" y="92" textAnchor="middle" className="pd-label pd-small">{t('safety.labels.chamber')}</text>
+    {/* fins + fan */}
+    {Array.from({ length: 10 }, (_, i) => <rect key={i} x={268 + i * 10.6} y="152" width="4" height="18" rx="1" fill="#8fa6b1" />)}
+    <g transform="translate(320 188)">
+      <rect x="-34" y="-10" width="68" height="20" rx="5" fill="#244757" />
+      <g className={fans ? 'pd-fan is-on' : 'pd-fan'}><ellipse rx="22" ry="5" fill="#6aa6bf" /><rect x="-2" y="-5" width="4" height="10" fill="#d8eef7" /></g>
+    </g>
 
-      {/* Dry-ice chamber */}
-      <rect x="120" y="70" width="110" height="40" fill="#6CC9EE" fillOpacity="0.1" stroke="#0C1E2B" strokeOpacity="0.2" />
+    {/* electronics bay in the warm side of the lid */}
+    <rect x="452" y="80" width="88" height="28" rx="6" fill="#fff" stroke="#9fb6c2" />
+    <text x="496" y="99" textAnchor="middle" className="pd-label pd-small">{t('safety.labels.bay')}</text>
+    <path d={WIRE} className="pd-wire" />
+    <circle cx="508" cy="306" r="5" fill="#fff" stroke="#7e95a2" strokeWidth="1.5" />
+    {Array.from({ length: 2 }, (_, i) => <circle key={i} r="2.6" fill="#55707e"><animateMotion dur="2.4s" begin={`${-i * 1.2}s`} repeatCount="indefinite" path={WIRE} keyPoints="1;0" keyTimes="0;1" calcMode="linear" /></circle>)}
 
-      {/* Food-air loop */}
-      <path
-        ref={foodRef}
-        d="M 130 150 L 240 150 Q 260 150 260 170 L 260 190 Q 260 205 240 205 L 60 205 Q 40 205 40 185 L 40 150"
-        fill="none"
-        stroke="#6CC9EE"
-        strokeWidth="1.5"
-        strokeDasharray="0"
-        opacity={scenario === 'fans' ? 0.25 : 1}
-      />
-      {[0, 1, 2, 3].map((i) => (
-        <circle key={i} ref={(el) => { foodDots.current[i] = el }} r="3" fill="#6CC9EE" opacity={scenario === 'fans' ? 0.15 : 0.9} />
-      ))}
+    {/* food-air loops: cold supply (blue) and warm return (orange) */}
+    {STREAMS.map(({ path, kind, dots, dur }) => <g key={path} className={`pd-loop ${kind} ${fans ? '' : 'is-idle'}`} opacity={filter !== 'all' && filter !== kind ? .12 : 1}>
+      <path d={path} className="pd-loop-glow" filter={`url(#${id}-glow)`} />
+      <path d={path} className="pd-loop-line" />
+      {fans && Array.from({ length: dots }, (_, i) => <circle key={i} r="3.4" fill={kind === 'cold' ? '#1d98d0' : '#e2773a'}><animateMotion dur={`${dur}s`} begin={`${-i * dur / dots}s`} repeatCount="indefinite" path={path} /></circle>)}
+    </g>)}
+    <text x="150" y="262" className="pd-label pd-cold-label">{t('airflow.coldShort')}</text>
+    <text x="490" y="262" textAnchor="end" className="pd-label pd-cold-label">{t('airflow.coldShort')}</text>
+    <g opacity={filter === 'cold' ? .2 : 1}><rect x="294" y="286" width="52" height="20" rx="10" fill="#fff" stroke="#f1c3a3" /><text x="320" y="300" textAnchor="middle" className="pd-label pd-warm-label">{t('airflow.warmShort')}</text></g>
+    <text x="332" y="172" className="pd-label pd-small pd-muted" textAnchor="start" transform="translate(48 0)">{t('airflow.fins')}</text>
 
-      {/* CO₂ exhaust: primary + backup */}
-      <path
-        ref={co2Ref}
-        d={scenario === 'blocked' ? 'M 175 70 L 175 30 L 250 30' : 'M 175 70 L 175 30 L 120 30'}
-        fill="none"
-        stroke={scenario === 'blocked' ? '#FF7A2F' : '#0C1E2B'}
-        strokeWidth="1.5"
-        strokeDasharray={scenario === 'blocked' ? '4 4' : '0'}
-        strokeOpacity="0.5"
-      />
-      {[0, 1, 2].map((i) => (
-        <circle key={i} ref={(el) => { co2Dots.current[i] = el }} r="2.5" fill="#0C1E2B" opacity="0.5" />
-      ))}
-      {scenario === 'blocked' && (
-        <path d="M 175 70 L 175 30 L 300 30" fill="none" stroke="#0C1E2B" strokeWidth="1.5" strokeOpacity="0.5" />
-      )}
+    {/* CO₂ ducts: primary (right) + backup (left), both normally open */}
+    <path d={CO2_PRIMARY} className={`pd-duct ${primaryOpen ? '' : 'is-blocked'}`} />
+    <path d={CO2_BACKUP} className="pd-duct" />
+    <path d={CO2_PRIMARY} className={`pd-co2 ${primaryOpen ? 'is-live' : 'is-dead'}`} />
+    <path d={CO2_BACKUP} className={`pd-co2 ${primaryOpen ? 'is-soft' : 'is-live'}`} />
+    {puffs(co2Live, 7, 3.2, true)}
+    {primaryOpen && puffs(CO2_BACKUP, 3, 4.2, false)}
+    <text x="470" y="38" textAnchor="middle" className="pd-label pd-co2-label">{t('safety.labels.primary')}</text>
+    <text x="170" y="38" textAnchor="middle" className="pd-label pd-co2-label">{t('safety.labels.backup')}</text>
+    {!primaryOpen && <g transform="translate(560 46)"><g className="pd-block"><circle r="12" fill="#fff" stroke="#d64f2a" strokeWidth="2" /><path d="M-5 -5 5 5M5 -5-5 5" stroke="#d64f2a" strokeWidth="2.4" strokeLinecap="round" /></g></g>}
+    <path d="M598 40 608 46 598 52" fill="none" stroke={primaryOpen ? '#e2773a' : '#c3ccd1'} strokeWidth="2" strokeLinecap="round" />
+    <path d="M42 40 32 46 42 52" fill="none" stroke="#e2773a" strokeWidth="2" strokeLinecap="round" opacity={primaryOpen ? .55 : 1} />
 
-      {/* Electrical */}
-      <path d="M 250 90 L 300 90 L 300 130" fill="none" stroke="#8FA3B0" strokeWidth="1.5" />
-    </svg>
-  )
+    {!fans && <g transform="translate(320 232)"><rect x="-58" y="-13" width="116" height="26" rx="13" fill="#fff" stroke="#c3d3db" /><text textAnchor="middle" y="4" className="pd-label pd-small pd-muted">{t('safety.scenarios.fans')}</text></g>}
+  </svg>
 }

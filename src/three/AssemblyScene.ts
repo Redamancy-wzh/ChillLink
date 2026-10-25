@@ -5,20 +5,23 @@ import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js'
 import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js'
 import { createAutoOrbit } from './autoOrbit'
+import { CARGO_ITEMS, CARGO_LAYOUTS, FLOOR_Y, type CargoId, type CargoRequest } from './cargo'
 
-export type ViewPreset = 'perspective' | 'top' | 'interior' | 'control' | 'cooling'
+export type ViewPreset = 'perspective' | 'top' | 'interior' | 'control' | 'cooling' | 'cargo'
 export interface SceneOptions {
   opening: number
   rotating: boolean
   reducedMotion: boolean
   preset: ViewPreset
   reset: number
+  cargo?: CargoRequest
 }
 export interface SceneCallbacks {
   ready: () => void
   error: () => void
   progress: (value: number) => void
   interact: () => void
+  cargoLoading?: (loading: boolean) => void
 }
 
 /** Brand label printed on the front panel: "ChillLink." wordmark + product name. */
@@ -138,6 +141,7 @@ export function createAssemblyScene(host: HTMLDivElement, options: () => SceneOp
   let dirty = true
   let calmFrames = 0
   let ticking = false
+  let lastCargo: CargoRequest | undefined
   const draco = new DRACOLoader().setDecoderPath(`${import.meta.env.BASE_URL}draco/`).setWorkerLimit(2)
   const loader = new GLTFLoader().setDRACOLoader(draco)
   const disposeModel = (root: THREE.Object3D) => {
@@ -220,7 +224,10 @@ export function createAssemblyScene(host: HTMLDivElement, options: () => SceneOp
     }
     if (!lid || latches.length !== 2) { disposeModel(model); cb.error(); return }
     scene.add(model)
+    model.add(cargoGroup)
     addBrandDecal(model)
+    lastCargo = options().cargo
+    syncCargo(lastCargo)
     cb.ready()
     dirty = true
     wake()
@@ -274,6 +281,98 @@ export function createAssemblyScene(host: HTMLDivElement, options: () => SceneOp
     })
   }
 
+  /* ---------- Cold-chain contents ---------- */
+  const cargoGroup = new THREE.Group()
+  cargoGroup.name = 'CARGO'
+  const cargoCache = new Map<string, Promise<THREE.Group>>()
+  const cargoRoots: THREE.Group[] = []
+  let cargoKey = ''
+  let cargoToken = 0
+  interface Drop { object: THREE.Object3D; restY: number; delay: number; t: number; hidden: boolean }
+  let drops: Drop[] = []
+  const loadCargo = (file: string) => {
+    let pending = cargoCache.get(file)
+    if (!pending) {
+      pending = new Promise<THREE.Group>((resolve, reject) => loader.load(`${import.meta.env.BASE_URL}model/contents/${file}`, gltf => {
+        gltf.scene.traverse(object => {
+          if (!(object instanceof THREE.Mesh)) return
+          object.castShadow = true
+          object.receiveShadow = true
+          ;(Array.isArray(object.material) ? object.material : [object.material]).forEach(material => { if (material instanceof THREE.MeshStandardMaterial) material.envMapIntensity = .9 })
+        })
+        cargoRoots.push(gltf.scene)
+        resolve(gltf.scene)
+      }, undefined, reject))
+      cargoCache.set(file, pending)
+    }
+    return pending
+  }
+  /** Rebuild the load when the category changes; toggle visibility when only the hidden list changes. */
+  function syncCargo(request: CargoRequest | undefined) {
+    const category = request?.category ?? null
+    const hidden = new Set(request?.hidden ?? [])
+    const key = category ?? ''
+    if (key === cargoKey) {
+      drops.forEach(drop => {
+        const isHidden = hidden.has(drop.object.userData.cargoId as CargoId)
+        if (isHidden !== drop.hidden) { drop.hidden = isHidden; drop.t = 0; drop.delay = 0 }
+      })
+      dirty = true; calmFrames = 0; wake()
+      return
+    }
+    cargoKey = key
+    const token = ++cargoToken
+    cargoGroup.clear()
+    drops = []
+    dirty = true; calmFrames = 0; wake()
+    if (!category) { cb.cargoLoading?.(false); return }
+    const layout = CARGO_LAYOUTS[category]
+    const entries = Object.entries(layout) as [CargoId, NonNullable<(typeof layout)[CargoId]>][]
+    cb.cargoLoading?.(true)
+    Promise.all(entries.map(([id]) => loadCargo(CARGO_ITEMS[id].file))).then(sources => {
+      if (disposed || token !== cargoToken) return
+      let order = 0
+      entries.forEach(([id, placements], index) => {
+        placements.forEach(([x, z, rotationY = 0, lift = 0, rotationX = 0]) => {
+          const instance = sources[index].clone()
+          instance.userData.cargoId = id
+          instance.position.set(x, FLOOR_Y + lift, z)
+          instance.rotation.set(rotationX, rotationY, 0)
+          const isHidden = hidden.has(id)
+          instance.visible = !isHidden
+          cargoGroup.add(instance)
+          drops.push({ object: instance, restY: FLOOR_Y + lift, delay: isHidden ? 0 : order++ * .045, t: isHidden ? 1 : 0, hidden: isHidden })
+        })
+      })
+      cb.cargoLoading?.(false)
+      dirty = true; calmFrames = 0; wake()
+    }).catch(() => { if (!disposed && token === cargoToken) cb.cargoLoading?.(false) })
+  }
+  /** Items drop into the liner with a soft bounce; hidden items lift out and fade away. */
+  function stepCargo(dt: number, reduced: boolean) {
+    let active = false
+    drops.forEach(drop => {
+      if (drop.delay > 0) { drop.delay -= dt; active = true; drop.object.visible = false; return }
+      if (drop.t >= 1) { drop.object.visible = !drop.hidden; drop.object.position.y = drop.restY; return }
+      drop.t = reduced ? 1 : Math.min(drop.t + dt / .55, 1)
+      const t = drop.t
+      if (drop.hidden) {
+        const e = t * t
+        drop.object.position.y = drop.restY + e * .22
+        drop.object.scale.setScalar(1 - e * .35)
+        drop.object.visible = t < 1
+      } else {
+        // Ease-out-back so items settle onto the floor.
+        const c = 1.4, e = 1 + (c + 1) * Math.pow(t - 1, 3) + c * Math.pow(t - 1, 2)
+        drop.object.visible = true
+        drop.object.scale.setScalar(1)
+        drop.object.position.y = drop.restY + (1 - e) * .24
+      }
+      active = true
+    })
+    return active
+  }
+
   const chooseView = (view: ViewPreset) => {
     if (view === 'top') {
       destination.set(.04, 1.07, .31)
@@ -290,6 +389,10 @@ export function createAssemblyScene(host: HTMLDivElement, options: () => SceneOp
       // exchanger filling the frame instead of showing the whole enclosure.
       destination.set(.22, .48, .34)
       target.set(0, .22, .02)
+    } else if (view === 'cargo') {
+      // Look over the front rim into the liner so the whole load is visible.
+      destination.set(.36, .72, .74)
+      target.set(0, -.07, .01)
     } else {
       const opened = options().opening > .1
       destination.set(opened ? .9 : .71, opened ? .64 : .49, opened ? 1.1 : .88)
@@ -318,6 +421,9 @@ export function createAssemblyScene(host: HTMLDivElement, options: () => SceneOp
     if (preset !== state.preset || reset !== state.reset || (requestedOpening > .1) !== (state.opening > .1)) {
       preset = state.preset; reset = state.reset; requestedOpening = state.opening; chooseView(preset)
     }
+    if (model && state.cargo !== lastCargo) { lastCargo = state.cargo; syncCargo(state.cargo) }
+    const cargoMoving = stepCargo(dt, state.reducedMotion)
+    if (cargoMoving) dirty = true
     const difference = state.opening - opening
     if (Math.abs(difference) > .0001) { opening += difference * smoothing; dirty = true; orbit.hold() }
     else opening = state.opening
@@ -339,7 +445,7 @@ export function createAssemblyScene(host: HTMLDivElement, options: () => SceneOp
     calmFrames++
     ticking = false
     // Stop scheduling once all movement settles. User input/options wake it again.
-    if (fanAnimating || orbiting || transitioning || Math.abs(difference) > .0001 || calmFrames < 4) frame = requestAnimationFrame(tick)
+    if (fanAnimating || orbiting || transitioning || cargoMoving || Math.abs(difference) > .0001 || calmFrames < 4) frame = requestAnimationFrame(tick)
   }
   function wake() {
     if (!disposed && visible && !document.hidden && !frame && !ticking) { previousTime = performance.now(); frame = requestAnimationFrame(tick) }
@@ -378,6 +484,7 @@ export function createAssemblyScene(host: HTMLDivElement, options: () => SceneOp
       renderer.domElement.removeEventListener('pointerdown', pointer, true)
       orbit.dispose(); controls.dispose(); draco.dispose()
       if (model) disposeModel(model)
+      cargoRoots.forEach(disposeModel)
       decals.forEach(decal => { decal.geometry.dispose(); (decal.material as THREE.Material).dispose() })
       decalTexture?.dispose()
       ground.geometry.dispose(); ground.material.dispose()

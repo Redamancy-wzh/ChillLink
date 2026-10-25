@@ -96,7 +96,7 @@ export default function TeamStory() {
   return <section id="team-story" className="field-gallery-section">
     <div className="content-wrap">
       <div className="section-heading section-heading-wide field-gallery-heading">
-        <div><p className="eyebrow">06 / TEAM STORY</p><h2>团队故事</h2></div>
+        <div><p className="eyebrow">TEAM STORY</p><h2>团队故事</h2></div>
         <p className="section-heading-copy">从样机装配到现场测试，记录 ChillLink 从想法走向可用原型的每一步。</p>
       </div>
       <div ref={stackRef} className="photo-stack" aria-label="团队故事照片展览，可用鼠标左右划动或点击卡片" onPointerEnter={e => { if (e.pointerType === 'mouse') setPaused(true) }} onPointerLeave={() => setPaused(false)} onPointerDown={handlePointerDown} onPointerUp={handlePointerUp} onPointerCancel={() => { dragStart.current = null }}>
