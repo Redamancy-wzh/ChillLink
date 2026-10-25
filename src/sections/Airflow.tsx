@@ -74,7 +74,7 @@ export default function Airflow() {
           {(['all', 'cold', 'warm'] as const).map(value => <button type="button" key={value} aria-pressed={value === filter} onClick={() => setFilter(value)}><i className={`airflow-swatch ${value}`} />{t(`airflow.${value}`)}</button>)}
         </div>
         <div className="airflow-playback">
-          <label><span>{t('airflow.speed')}</span><input aria-label={t('airflow.speed')} type="range" min=".5" max="2" step=".25" value={speed} disabled={reducedMotion} onChange={e => setSpeed(Number(e.target.value))} /><output>{speed.toFixed(2).replace(/0$/, '')}×</output></label>
+          <label><span>{t('airflow.speed')}</span><input aria-label={t('airflow.speed')} type="range" min=".5" max="2" step=".25" value={speed} disabled={reducedMotion} onChange={e => setSpeed(Number(e.target.value))} style={{ '--range-progress': `${(speed - .5) / 1.5 * 100}%` } as React.CSSProperties} /><output>{speed.toFixed(2).replace(/0$/, '')}×</output></label>
           <NeuToggle size="sm" checked={playing && !reducedMotion} disabled={reducedMotion} onChange={setPlaying} label={t('airflow.playing')} caption={t(reducedMotion ? 'airflow.static' : 'airflow.playing')} />
         </div>
       </div>

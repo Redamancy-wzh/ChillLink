@@ -35,7 +35,7 @@
 .airflow-reset { width: 31px; height: 31px; border: 1px solid rgba(184,225,238,.21); border-radius: 8px; color: #a8d9e8; font-size: 1.2rem; line-height: 1; }
 .airflow-reset:hover { border-color: #77cbe5; color: #e4faff; }
 .airflow-volume-stage { position: relative; height: clamp(390px,37vw,540px); margin: 0 .45rem; overflow: hidden; border-radius: 16px; background: radial-gradient(ellipse at 50% 52%,#1b5268 0%,#123949 42%,#0d2936 100%); }
-.airflow-stage-glow { position: absolute; inset: 12% 17%; background: radial-gradient(ellipse,rgba(98,206,242,.22),transparent 65%); filter: blur(24px); pointer-events: none; }
+.airflow-stage-glow { position: absolute; inset: 12% 17%; background: radial-gradient(ellipse closest-side,rgba(98,206,242,.2),rgba(98,206,242,.07) 60%,transparent 100%); pointer-events: none; }
 .airflow-3d-host, .airflow-3d-host canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .airflow-volume-stage .airflow-diagram { display: none; }
 .airflow-cutaway-badge { position: absolute; left: 1.2rem; bottom: 1.1rem; padding: .4rem .55rem; border: 1px solid rgba(156,221,239,.25); border-radius: 5px; color: #9bddec; background: rgba(8,36,49,.35); font: .56rem ui-monospace,monospace; letter-spacing: .1em; }

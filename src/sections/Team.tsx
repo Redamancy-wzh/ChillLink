@@ -18,13 +18,13 @@ export default function Team() {
         <figure className="team-main-photo"><img src="./img/team/workshop.webp" alt={t('team.photoCaption')} style={{ objectPosition: "center 62%" }} loading="lazy" /><figcaption>{t('team.photoCaption')}</figcaption></figure>
       </div>
       <div className="team-members">
+        <div className="team-subheading"><p className="eyebrow">{t('team.membersTitle')}</p></div>
+        <div className="team-member-grid">{members.map((member) => <article className="team-member-card" key={member.name}><div className="team-member-avatar">{member.name.slice(0, 1)}</div><div><h3>{member.name} <small>{member.english}</small></h3><strong>{member.role}</strong><p>{member.body}</p></div></article>)}</div>
         <div className="team-principles" aria-label={t('team.principlesLabel')}>
           {principles.map((principle, i) => <article className="team-principle" key={principle.title}>
             <span className="eyebrow">0{i + 1}</span><h3>{principle.title}</h3><p>{principle.body}</p>
           </article>)}
         </div>
-        <div className="team-subheading"><p className="eyebrow">{t('team.membersTitle')}</p></div>
-        <div className="team-member-grid">{members.map((member) => <article className="team-member-card" key={member.name}><div className="team-member-avatar">{member.name.slice(0, 1)}</div><div><h3>{member.name} <small>{member.english}</small></h3><strong>{member.role}</strong><p>{member.body}</p></div></article>)}</div>
       </div>
       <div className="team-focus-grid">{areas.map((area, i) => <article className="team-focus-card" key={area.title}>
         <img src={images[i]} alt={area.title} loading="lazy" />

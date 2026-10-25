@@ -1,7 +1,5 @@
 @import '@fontsource-variable/archivo/wdth.css';
 @import '@fontsource-variable/noto-sans-sc/wght.css';
-@import '@fontsource-variable/noto-sans-jp/wght.css';
-@import '@fontsource-variable/noto-sans-kr/wght.css';
 
 @tailwind base;
 @tailwind components;
@@ -39,7 +37,7 @@
     inset: 0;
     opacity: 0.035;
     pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-image: url("../assets/noise.png");
     background-repeat: repeat;
     background-size: 180px;
   }
@@ -163,7 +161,7 @@
   .eyebrow { color: var(--cryo); font-size: .75rem; font-weight: 650; letter-spacing: .15em; text-transform: uppercase; }
   .lede { color: var(--ink-60); font-size: clamp(1.05rem, 1.8vw, 1.25rem); line-height: 1.7; max-width: 50ch; }
   .hero-section { position: relative; min-height: min(860px, 100vh); display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; padding: 8rem 0 3rem; }
-  .hero-section::before { content: ''; position: absolute; width: 40rem; height: 30rem; right: -10rem; top: 10rem; background: radial-gradient(circle, rgba(108,201,238,.22), transparent 68%); filter: blur(34px); pointer-events: none; }
+  .hero-section::before { content: ''; position: absolute; width: 40rem; height: 30rem; right: -10rem; top: 10rem; background: radial-gradient(circle closest-side, rgba(108,201,238,.2), rgba(108,201,238,.08) 55%, transparent 100%); pointer-events: none; }
   .hero-grid { display: grid; grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: clamp(2rem, 6vw, 6rem); align-items: center; }
   .hero-copy { position: relative; z-index: 1; }
   .hero-copy .display { margin: 1rem 0 1.8rem; color: var(--abyss); max-width: 8ch; }
