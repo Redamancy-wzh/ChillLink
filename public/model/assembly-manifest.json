@@ -1,0 +1,23 @@
+{
+  "source": "/Users/Liam/Documents/Sci-Tech Innovation/SP/SryoDrive/3D model/cooler_33L_control_box_assembly.blend",
+  "export": "cooler_33L_control_box_assembly.glb",
+  "source_visible_objects": 449,
+  "export_meshes": 72,
+  "triangles": 215970,
+  "bounds_blender_m": [
+    [
+      -0.273,
+      -0.17005,
+      0.0
+    ],
+    [
+      0.273,
+      0.1628,
+      0.39235
+    ]
+  ],
+  "bytes": 1068588,
+  "animation": "CryoDrive_Open_Close (1 closed → 70 open → 90 closed)",
+  "opening_degrees": 105,
+  "excluded": "hidden objects, references, cutters, studio, old optional retrofit parts"
+}

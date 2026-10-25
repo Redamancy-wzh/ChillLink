@@ -1,0 +1,39 @@
+{
+  "name": "cryodrive-site",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "i18n:check": "node scripts/i18n-check.mjs",
+    "prepare:model": "\"/Applications/Blender.app/Contents/MacOS/Blender\" -b \"../../3D model/cooler_33L_control_box_assembly.blend\" --python scripts/export_assembly.py"
+  },
+  "dependencies": {
+    "@fontsource-variable/archivo": "^5.1.0",
+    "@fontsource-variable/noto-sans-jp": "^5.1.0",
+    "@fontsource-variable/noto-sans-kr": "^5.1.0",
+    "@fontsource-variable/noto-sans-sc": "^5.1.0",
+    "i18next": "^23.16.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.1.0",
+    "three": "^0.186.1",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "^4.3.3",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.10",
+    "vitest": "^2.1.4"
+  }
+}

@@ -1,0 +1,957 @@
+{
+  "meta": {
+    "title": "ChillLink · 高端冷链运输系统",
+    "skip": "跳到正文"
+  },
+  "nav": {
+    "model": "模型",
+    "control": "控温",
+    "safety": "安全",
+    "team": "团队",
+    "roadmap": "验证路线",
+    "menu": "菜单",
+    "close": "关闭",
+    "language": "语言",
+    "home": "ChillLink 首页",
+    "product": "产品",
+    "solutions": "解决方案",
+    "technology": "技术",
+    "company": "关于 ChillLink",
+    "contact": "咨询产品",
+    "airflow": "气体流向",
+    "specifications": "技术参数"
+  },
+  "hero": {
+    "title": "让高端冷链，始终在掌控之中。",
+    "subtitle": "Effi-Chillcrate X1 是 ChillLink 面向高端日料、医疗样本、药物与高价值食材开发的专业冷链运输系统。33 L 产品将可控干冰冷源、循环换热、智能控温与 CO₂ 独立排气集成于一体，以 −25 至 +10 °C 为短途配送的目标温区。",
+    "ctaModel": "探索三维模型",
+    "ctaHow": "联系合作",
+    "scroll": "向下滚动",
+    "canvasLabel": "ChillLink 33 L 控制盒总成三维模型，可拖动旋转并打开顶盖",
+    "eyebrow": "ChillLink / Effi-Chillcrate X1"
+  },
+  "specs": [
+    {
+      "label": "目标温区",
+      "value": "−25 → +10 °C",
+      "note": "展示默认 −10 °C",
+      "status": ""
+    },
+    {
+      "label": "干冰装填",
+      "value": "1 kg",
+      "note": "按质量称量",
+      "status": ""
+    },
+    {
+      "label": "内部尺寸",
+      "value": "46 × 25 × 26.5 cm",
+      "note": "33 L 箱体净空（长 × 宽 × 高）",
+      "status": ""
+    },
+    {
+      "label": "路径分离",
+      "value": "3 条",
+      "note": "食品空气 / CO₂ 排气 / 电气信号",
+      "status": ""
+    }
+  ],
+  "model": {
+    "title": "把它打开。",
+    "desc": "从整体到细节，亲手探索新的控制盒总成。拖动旋转，平滑开盖；双 OLED、摇杆、按钮与盖内冷却组件，都来自同一份完整装配。",
+    "descTouch": "从整体到细节，亲手探索新的控制盒总成。拖动旋转，平滑开盖；双 OLED、摇杆、按钮与盖内冷却组件，都来自同一份完整装配。",
+    "note": "ChillLink 33 L 顶盖系统：干冰舱、循环风道、控制盒与独立排气一体化设计",
+    "progress": "拆解进度",
+    "prev": "上一层",
+    "next": "下一层",
+    "stage": "第 {{n}} / {{total}} 层",
+    "loading": "正在载入模型",
+    "fallbackCaption": "WebGL 暂不可用，已切换到模型渲染图。",
+    "ghostTag": "示意体积",
+    "parts": {
+      "latch": {
+        "name": "不锈钢过中心锁扣 × 2",
+        "spec": "原箱锁扣位置保留，新顶盖需与之适配"
+      },
+      "lid": {
+        "name": "原箱盖",
+        "spec": "V1 中由新的控温顶盖总成替代"
+      },
+      "handle": {
+        "name": "顶部折叠提手",
+        "spec": "V1 保留，需连接到金属承力框"
+      },
+      "gasket": {
+        "name": "连续压缩密封圈",
+        "spec": "沿箱口一周"
+      },
+      "side": {
+        "name": "两侧折叠提手",
+        "spec": "两侧折叠提手"
+      },
+      "body": {
+        "name": "33 L 保温下箱",
+        "spec": "33 L 保温箱体"
+      },
+      "underside": {
+        "name": "食品区出回风口",
+        "spec": "进回风之间有隔板，保护网可拆洗"
+      },
+      "insulation": {
+        "name": "可拆保温内衬",
+        "spec": "隔开冷端与食品区上方空间"
+      },
+      "deck": {
+        "name": "外壳与技术舱",
+        "spec": "承力框、保温层与顶盖外壳"
+      },
+      "fins": {
+        "name": "铝制换热鳍片 × 11",
+        "spec": "箱内换热件，食品区空气流过鳍片"
+      },
+      "fans": {
+        "name": "120 × 120 mm PWM 风扇",
+        "spec": "1 × 120 × 120 mm · PWM 调速"
+      },
+      "dryice": {
+        "name": "可取出铝制干冰舱",
+        "spec": "干冰装填 1 kg"
+      },
+      "co2": {
+        "name": "CO₂ 独立排气通道",
+        "spec": "常开主通道 + 备用路径 · ePTFE 只防尘防溅"
+      },
+      "electronics": {
+        "name": "ESP32 电控舱与 USB-C PD",
+        "spec": "温端隔离 · 经协商与 DC-DC 变换后供电"
+      },
+      "ui": {
+        "name": "0.96″ OLED 与按键",
+        "spec": "显示实测温度、目标温度、风扇状态与报警"
+      },
+      "filllid": {
+        "name": "加冰口盖",
+        "spec": "补冰时不打开食品盖，不把干冰舱封成承压容器"
+      }
+    }
+  },
+  "problem": {
+    "title": "高价值货品，需要更高规格的冷链。",
+    "body": "高端日料、医疗样本、药物和高价值食材，对温度稳定性、过程可追溯和配送体验都有更高要求。ChillLink 将专业冷源、智能控制与可重复使用的运输装备结合，让每一次短途配送都拥有清晰、稳定、可管理的温度环境。",
+    "items": [
+      {
+        "title": "高端日料与鲜活食材",
+        "body": "守住刺身、海胆、鱼子酱与高端食材的低温品质，让餐桌端感受到完整的新鲜度。"
+      },
+      {
+        "title": "医疗样本与药物",
+        "body": "为检验样本、生物制品和温度敏感药物提供更稳定的短途运输环境与过程记录。"
+      },
+      {
+        "title": "高价值冷冻产品",
+        "body": "针对冷冻甜品、精品食材和高端零售订单，减少温度波动带来的品质损耗。"
+      }
+    ],
+    "stats": {
+      "coldChain": {
+        "label": "中国冷链物流市场，2025 年",
+        "value": 944.6,
+        "decimals": 1,
+        "prefix": "",
+        "suffix": " 亿美元",
+        "then": "预计 2031 年约 1,726 亿美元",
+        "source": "来源：Mordor Intelligence 估算"
+      },
+      "retail": {
+        "label": "中国即时零售市场，2030 年有望超过",
+        "value": 2,
+        "decimals": 0,
+        "prefix": "",
+        "suffix": " 万亿元",
+        "then": "商品正转向门店与前置仓 30–90 分钟送达",
+        "source": "来源：商务部研究院下属机构预测"
+      },
+      "cdc": {
+        "label": "干冰的存放规则",
+        "big": "不可密封",
+        "then": "干冰不能存放在紧密密封的容器中",
+        "source": "来源：美国 CDC 安全提示"
+      }
+    }
+  },
+  "control": {
+    "title": "风扇，就是冷量的阀门。",
+    "body": "食品区回风穿过循环风道与铝制换热鳍片，将热量交给干冰冷源后重新送回箱内。智能控制器持续读取多路温度，根据目标温区调节风扇换热强度。页面展示的是控制逻辑，实物控温表现留给后续测试。",
+    "dialLabel": "目标温度",
+    "target": "目标",
+    "average": "模拟平均温度",
+    "fan": "风扇 PWM",
+    "editing": "编辑中，松手确认",
+    "confirmed": "已确认，积分项清零",
+    "keyHint": "方向键 ±0.5 °C，回车确认",
+    "trace": "模拟平均温度（最近 3 分钟模拟时间）",
+    "simTime": "模拟时间 ×4",
+    "oledTitle": "电控样机界面",
+    "oledControl": "控制屏",
+    "oledData": "数据屏",
+    "oledCaption": "双 OLED 分别显示控制信息与传感器数据。",
+    "airflow": {
+      "chamber": "干冰舱",
+      "fins": "铝鳍片",
+      "fans": "单个 120 × 120 mm 风扇",
+      "return": "回风",
+      "outlet": "出风",
+      "food": "食品区"
+    },
+    "simCaption": "产品运行逻辑示意：页面曲线为展示数据"
+  },
+  "safety": {
+    "title": "排气，不经过食品区。",
+    "body": "食品空气循环、CO₂ 排气、电气信号三条路径互不相通。CO₂ 经常开主排气通道直接排出箱外，不穿过食品风道；断电或风扇停转时排气不中断，旁边另有一条常开备用通道。",
+    "paths": {
+      "food": "食品空气循环",
+      "co2": "CO₂ 排气",
+      "elec": "电气与信号"
+    },
+    "labels": {
+      "chamber": "干冰舱",
+      "food": "食品区",
+      "bay": "电控舱",
+      "primary": "主排气",
+      "backup": "备用排气",
+      "outside": "箱外"
+    },
+    "scenarioLabel": "场景",
+    "scenarios": {
+      "normal": "正常",
+      "fans": "风扇停转",
+      "blocked": "主通道受阻"
+    },
+    "status": {
+      "normal": "三条路径各自独立（设计）",
+      "fans": "排气不依赖风扇（设计要求）",
+      "blocked": "备用路径保持通气"
+    },
+    "co2": {
+      "title": "CO₂ 报警阈值演示",
+      "slider": "模拟 CO₂ 浓度",
+      "normal": "正常",
+      "pending": "超过 2000 ppm，计时中",
+      "alarm": "声光报警 · 2 Hz",
+      "critical": "声光报警 · 4 Hz",
+      "steady": "报警中（减少动态效果模式下常亮显示）",
+      "rule": "固件规则：≥ 2000 ppm 持续约 3 秒触发报警，≥ 5000 ppm 时闪烁加快；已触发的报警，要收到一个有效且低于 2000 ppm 的读数才会解除。传感器量程 0–5000 ppm。",
+      "led": "警示灯",
+      "buzzer": "蜂鸣器"
+    },
+    "volume": "1 kg 干冰升华约产生 0.5 m³ CO₂（量级估算，非实测）。",
+    "warning": "不可在密闭车厢、房间或通风不足的空间使用。"
+  },
+  "compare": {
+    "title": "选择适合货品价值的冷链方案。",
+    "headers": [
+      "配送维度",
+      "EPS 泡沫箱",
+      "PU 保温箱",
+      "ChillLink 33 L"
+    ],
+    "rows": [
+      [
+        "温度水平",
+        "接近环境温度",
+        "隔热更强，仍随环境升温",
+        "−25～+10 °C 可调控"
+      ],
+      [
+        "冷源方式",
+        "无主动冷源",
+        "冰块 / 冰袋",
+        "可控干冰冷源 + 循环换热"
+      ],
+      [
+        "适用货品",
+        "普通短途配送",
+        "常规冷藏食品",
+        "高端日料、医疗样本、药物与高价值食材"
+      ],
+      [
+        "过程数据",
+        "无",
+        "无",
+        "温度、风扇状态与 CO₂ 状态可视化"
+      ],
+      [
+        "重复使用",
+        "箱体低成本",
+        "箱体可重复使用",
+        "箱体与智能顶盖长期重复使用"
+      ],
+      [
+        "使用体验",
+        "依赖经验加冰",
+        "温区波动明显",
+        "目标温度可设定，配送过程更可管理"
+      ]
+    ],
+    "disclaimer": "页面展示产品目标参数与典型工况说明；实物性能需按对应工况完成测试确认。",
+    "series": [
+      "EPS 泡沫箱 · 无冰",
+      "EPS 泡沫箱 · 加冰",
+      "PU 箱 · 无冰",
+      "PU 箱 · 加冰",
+      "ChillLink · 可控冷链"
+    ],
+    "costRows": [
+      [
+        "EPS 泡沫箱 · 不加冷源",
+        "约 ¥9 / 次",
+        "33 L 箱体单次使用，按团队采购参考价计。仅隔热，没有冷源补充。"
+      ],
+      [
+        "EPS 泡沫箱 + 水冰",
+        "约 ¥24–29 / 次",
+        "一次性 33 L EPS 箱 ¥9 + 2.5 kg 水冰 ¥15–20，按团队提供价格合计。"
+      ],
+      [
+        "周转保温箱 + 水冰",
+        "约 ¥15–20 / 次",
+        "复用 33 L PU / EPP 箱体，仅计 2.5 kg 外购水冰。箱体购置及回收周转成本另计。"
+      ],
+      [
+        "EPS 泡沫箱 + 凝胶冰袋",
+        "¥9 + ¥0.60 × n",
+        "1688 南通宝伦凝胶冰袋挂牌 ¥0.60，暂按每袋报价估算；n 为每单用袋数。规格与用量需确认，若用 5 袋则约 ¥12。"
+      ],
+      [
+        "ChillLink + 0.5 kg 干冰",
+        "预算约 ¥3 / 次",
+        "按团队单次预算展示。¥18 / 6 kg 折算 ¥3/kg，0.5 kg 干冰材料费为 ¥1.50；预算与材料费的差额尚未分项。"
+      ]
+    ],
+    "eyebrow": "CHILL PERFORMANCE / COST",
+    "intro": "同一组 33 L、120 分钟配送工况下的典型估算曲线，用于展示不同箱体与冷源的温度表现。",
+    "chartTitle": "33 L 配送温度曲线",
+    "chartRange": "典型工况估算 / 0–120 min",
+    "targetTemperature": "目标温度 −10 °C",
+    "chartLabel": "EPS、PU 与 ChillLink 配送温度估算曲线",
+    "x": "时间（分钟）",
+    "y": "箱内温度",
+    "costTitle": "单次配送耗材成本",
+    "costSub": "33 L 方案参考 / 一次性箱体计入，周转箱不重复购置",
+    "costNote": "费用口径：一次性包装 + 本次冷源耗材；不含可复用设备折旧、人工、运费、预冷电费及周转回收。冰袋的 n 与示例用量仅用于算价，不表示能满足 33 L 的实际保冷需求。各方案温区、装载与持续时间不同，此处不作同等制冷性能或完整运营成本比较。",
+    "iceLink": "1688 冰袋采购参考 ↗"
+  },
+  "roadmap": {
+    "title": "下一步，交给测试。",
+    "steps": [
+      {
+        "title": "做出能运行的样机",
+        "en": "Build",
+        "body": "把冷端、风路、电控和 CO₂ 检测连成一个最小闭环。"
+      },
+      {
+        "title": "记录真实曲线",
+        "en": "Measure",
+        "body": "降温速度、温度均匀性、保冷时长、干冰消耗、开箱扰动后的恢复。"
+      },
+      {
+        "title": "走进用户现场",
+        "en": "Ask",
+        "body": "访谈冰淇淋门店、冻品商户和骑手站点，确认谁会为稳定的低温付费。"
+      },
+      {
+        "title": "收敛下一版",
+        "en": "Refine",
+        "body": "用数据和反馈收敛结构、成本、品牌与商业路径。"
+      }
+    ],
+    "chart": {
+      "title": "配送方案对比：EPS / PU / ChillLink",
+      "empty": "实测数据待填入",
+      "illustrative": "示意，非实测",
+      "updated": "数据更新于 {{date}} · 来源 {{source}}",
+      "x": "时间（分钟）",
+      "y": "箱内温度（°C）",
+      "tooltip": "{{t}} 分钟 · {{temp}} °C"
+    },
+    "budget": {
+      "title": "原型耗材预算",
+      "total": "合计",
+      "categories": [
+        {
+          "name": "箱体、换热与保温",
+          "items": "保温箱 65、铝件 80、保温棉密封条 20",
+          "amount": 165
+        },
+        {
+          "name": "电控、传感与电路",
+          "items": "ESP32 35、DS18B20 28、CO₂ 模块 75、风扇 35、OLED 蜂鸣器 LED 42、MOS 与升降压 45、面包板线材 45、洞洞板焊锡 35",
+          "amount": 340
+        },
+        {
+          "name": "排气与防护",
+          "items": "硅胶管、透气膜、防护网 45",
+          "amount": 45
+        },
+        {
+          "name": "对照实验与测试",
+          "items": "温湿度计 45、干冰 60、冰袋 30、保温袋 35、泡沫箱 40、测试样品 60",
+          "amount": 270
+        },
+        {
+          "name": "安全与展示",
+          "items": "手套护目镜标签 60、展示打印备件 60",
+          "amount": 120
+        }
+      ],
+      "note": "当前只核算原型耗材。单台成本、定价与收入路径，将在样机成本和用户访谈确认后补充。"
+    }
+  },
+  "team": {
+    "title": "一起把想法，做成可用的冷链装备。",
+    "body": "ChillLink 团队围绕低温配送中的真实需求，从结构建模、样机装配到温控电控，将设计与动手实践连接起来。在一次次讨论、搭建和调整中，推进 Effi-Chillcrate X1 的开发。",
+    "track": "Premium cold-chain transport / Product system",
+    "roadmapLink": "联系团队",
+    "modelLink": "查看产品模型",
+    "eyebrow": "认识 CHILLLINK 团队",
+    "photoCaption": "团队讨论与研发现场",
+    "contactLink": "联系团队，交流合作",
+    "areas": [
+      {
+        "title": "产品与结构设计",
+        "body": "围绕箱体、顶盖与换热组件，梳理空间布局、装配关系和使用方式。"
+      },
+      {
+        "title": "电控与样机搭建",
+        "body": "将测温、风扇控制、状态显示与 CO₂ 监测连接到样机，逐步完善软硬件配合。"
+      },
+      {
+        "title": "协作与迭代",
+        "body": "共同讨论设计方案、观察装配表现，把问题带回下一轮调整。"
+      }
+    ],
+    "membersTitle": "团队成员",
+    "principlesLabel": "团队使命、愿景与价值观",
+    "principles": [
+      {
+        "title": "使命",
+        "body": "以更高效、可重复使用的冷链装备，减少冷链运输中的碳排放、资源浪费与食物损耗。"
+      },
+      {
+        "title": "愿景",
+        "body": "以环境与能源为创新坐标，推动负责任的生产与消费，为联合国可持续发展目标 12 提供可落地的技术实践。"
+      },
+      {
+        "title": "价值观",
+        "body": "以用户体验为起点，以商业可持续为基础，以技术效率为尺度，并始终把地球的长期健康放在决策之中。"
+      }
+    ],
+    "members": [
+      {
+        "name": "梁欣悦",
+        "english": "Joyce",
+        "role": "CEO",
+        "body": "团队负责人，具备较强的演讲与表达能力。"
+      },
+      {
+        "name": "陈泽宇",
+        "english": "James",
+        "role": "CRO",
+        "body": "负责数据分析与研究，对市场有较强的判断力。"
+      },
+      {
+        "name": "陈姿贝",
+        "english": "Zibei",
+        "role": "CTO",
+        "body": "负责技术设计、网站建设与内部电气系统设计。"
+      }
+    ]
+  },
+  "footer": {
+    "description": "ChillLink 33 L 高端冷链运输系统：可控低温、智能监测、重复使用。",
+    "status": "产品系统",
+    "disclaimer": "温度与成本图表为工况估算。",
+    "company": "关于 ChillLink",
+    "product": "产品",
+    "safety": "安全边界",
+    "contact": "合作入口",
+    "emailLabel": "合作或咨询请联系"
+  },
+  "companyIntro": {
+    "eyebrow": "关于 ChillLink",
+    "title": "为高价值货品，建立更高规格的冷链体验。",
+    "body": "ChillLink 自主开发高端冷链运输系统，服务高端日料、医疗样本、药物与精品食品配送。我们把 33 L 箱体、可控干冰冷源、智能控温和独立排气设计为一个可持续使用的专业装备。",
+    "link": "了解我们的解决方案",
+    "facts": [
+      {
+        "label": "产品形态",
+        "value": "33 L 冷链运输系统"
+      },
+      {
+        "label": "目标温区",
+        "value": "−25 → +10 °C"
+      },
+      {
+        "label": "服务领域",
+        "value": "高端餐饮 / 医疗健康 / 精品食品"
+      }
+    ]
+  },
+  "solutions": {
+    "eyebrow": "解决方案",
+    "title": "为高价值货品，提供专业的低温保护。",
+    "body": "从装箱、运输到交付，ChillLink 将稳定温区、过程可见与高端服务体验放在同一套产品系统中。",
+    "items": [
+      {
+        "title": "稳定低温",
+        "body": "−25 至 +10 °C 目标温区可调，循环换热帮助货品远离局部过冷与温度大幅波动。",
+        "tag": "温度管理"
+      },
+      {
+        "title": "高价值货品适配",
+        "body": "覆盖高端日料、医疗样本、药物、冷冻甜品与精品食材等对温度敏感的配送场景。",
+        "tag": "应用场景"
+      },
+      {
+        "title": "可视化与安全",
+        "body": "温度、风扇状态与 CO₂ 状态集中显示，食品空气循环与独立排气路径分离。",
+        "tag": "智能运输"
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "ChillLink 产品咨询",
+    "title": "让每一次高端配送，都拥有与货品价值匹配的冷链。",
+    "body": "如果你经营高端日料、医疗健康、药物或精品食品供应链，欢迎联系我们了解 ChillLink 33 L 系统的产品配置、配送方案与合作方式。",
+    "primary": "咨询 ChillLink 产品",
+    "secondary": "打开产品模型",
+    "panelTitle": "适合这些场景",
+    "items": [
+      "高端日料与鲜活食材配送",
+      "医疗样本与温度敏感药物运输",
+      "冷冻甜品与精品食品供应链",
+      "高端餐饮与即时零售配送"
+    ],
+    "note": "页面曲线与成本为典型工况估算，用于方案比较。"
+  },
+  "viewer": {
+    "live": "LIVE / 实时模型",
+    "canvas": "ChillLink 33 L 控制盒总成三维模型，可拖动旋转并打开顶盖",
+    "fallback": "WebGL 暂不可用，已切换到模型渲染图。",
+    "fallbackAlt": "ChillLink Effi-Chillcrate X1 控制盒总成渲染图，顶盖打开，内部可见换热器与循环风扇",
+    "hint": "拖动旋转 · 点击打开 · 滚轮缩放（按住 ⌘ / Ctrl）",
+    "views": "模型视角",
+    "perspective": "透视",
+    "top": "顶视",
+    "interior": "内部",
+    "open": "打开顶盖",
+    "close": "关闭顶盖",
+    "angle": "开合角度",
+    "rotate": "自动旋转",
+    "pause": "暂停旋转",
+    "reset": "重置视角",
+    "detailControl": "控制盒细节",
+    "detailControlBody": "双 OLED、摇杆与独立按钮，让显示和控制操作集中在箱盖上方。",
+    "detailCooling": "盖内冷端",
+    "detailCoolingBody": "开启箱盖，查看风扇、换热鳍片、铝制容器与安装限位结构。",
+    "detailMotion": "真实开合动作",
+    "detailMotionBody": "顶盖绕后部铰链抬起，前侧双锁扣同步翻开。每个细节，随手可见。",
+    "touchHint": "单指旋转 · 双指缩放 · 点击开盖",
+    "control": "操作面板",
+    "cooling": "冷端风扇"
+  },
+  "airflow": {
+    "title": "让冷量，流动起来。",
+    "body": "较暖空气从中部上升，经过风扇与鳍片换热，再向左右两侧送出。冷却后的空气沿箱壁下沉，回到储物区，形成循环。",
+    "plane": "平面流向示意",
+    "volume": "走进空气循环",
+    "all": "完整循环",
+    "cold": "冷空气送风",
+    "warm": "较暖空气回流",
+    "speed": "演示速度",
+    "pause": "暂停演示",
+    "play": "继续演示",
+    "static": "静态展示",
+    "reset": "重置三维视角",
+    "filterLabel": "高亮流动阶段",
+    "volumeAlt": "可旋转的三维剖面：粒子从中央上升，经鳍片换热，再沿两侧下沉",
+    "loading": "正在构建空气循环…",
+    "fallback": "三维显示暂不可用，已切换为动态平面示意。",
+    "orbit": "拖动旋转 · 按住 ⌘ / Ctrl 滚轮缩放",
+    "touch": "单指旋转 · 双指缩放",
+    "cutaway": "剖切视图 / 原理示意",
+    "sectionView": "正面剖视",
+    "chamber": "干冰舱",
+    "fins": "换热鳍片",
+    "fans": "单个 120 × 120 mm 风扇",
+    "coldShort": "冷空气 ↓",
+    "warmShort": "回风 ↑",
+    "storage": "储物区 / 箱内循环空气",
+    "returnTitle": "中央回流",
+    "returnBody": "风扇从储物区吸入较暖空气，让回风沿中央入口向上流动。",
+    "exchangeTitle": "鳍片换热",
+    "exchangeBody": "空气穿过金属鳍片，热量经容器壁传给干冰，空气被冷却。",
+    "supplyTitle": "两侧送冷",
+    "supplyBody": "冷却空气向左右分流，沿箱壁下沉，再回到储物区参与循环。",
+    "note": "单个 120 × 120 mm PWM 风扇驱动两侧送风与中央回风。食品空气循环与 CO₂ 排气独立；图中的颜色与运动用于说明气流路径。",
+    "safetyLink": "查看 CO₂ 独立排气",
+    "fanMode": "风扇版本",
+    "singleFan": "单风扇",
+    "dualFan": "单个 120 × 120 mm 风扇"
+  },
+  "technicalSpecs": {
+    "eyebrow": "技术参数",
+    "title": "技术参数与工作原理",
+    "intro": "33 L 储物空间，−25 至 +10 °C 目标温区。通过单个 120 × 120 mm PWM 风扇调节循环换热，结合多点测温与独立 CO₂ 排气。",
+    "groups": [
+      {
+        "title": "结构与尺寸",
+        "code": "01",
+        "rows": [
+          {
+            "label": "箱体容积",
+            "value": "33 L",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "顶盖外廓",
+            "value": "约 530 × 325 mm",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "闭合高度",
+            "value": "约 340 mm",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "内胆净尺寸",
+            "value": "约 460 × 250 × 265 mm",
+            "detail": "",
+            "status": ""
+          }
+        ]
+      },
+      {
+        "title": "温控与换热",
+        "code": "02",
+        "rows": [
+          {
+            "label": "目标温区",
+            "value": "−25 → +10 °C",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "干冰装填",
+            "value": "1 kg",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "换热组件",
+            "value": "1 × 120 × 120 mm PWM",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "温度采样",
+            "value": "最多 3 路 DS18B20",
+            "detail": "",
+            "status": ""
+          }
+        ]
+      },
+      {
+        "title": "气路与安全",
+        "code": "03",
+        "rows": [
+          {
+            "label": "路径分离",
+            "value": "3 条独立路径",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "CO₂ 量程",
+            "value": "0–5000 ppm",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "报警规则",
+            "value": "≥ 2000 ppm 约 3 秒",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "排气设计",
+            "value": "常开主通道 + 备用路径",
+            "detail": "",
+            "status": ""
+          }
+        ]
+      },
+      {
+        "title": "电控与操作",
+        "code": "04",
+        "rows": [
+          {
+            "label": "控制器",
+            "value": "ESP32 + PID",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "供电链",
+            "value": "USB-C PD → DC-DC",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "显示界面",
+            "value": "2 × OLED",
+            "detail": "",
+            "status": ""
+          },
+          {
+            "label": "操作方式",
+            "value": "摇杆 + 独立按钮",
+            "detail": "",
+            "status": ""
+          }
+        ]
+      }
+    ],
+    "disclosure": "食品空气循环与 CO₂ 排气独立设置。干冰舱保持通气，使用环境需通风。",
+    "galleryTitle": "装配与使用现场",
+    "gallery": [
+      {
+        "src": "./img/showcase/5790.webp",
+        "alt": "储物与装载",
+        "label": "储物与装载"
+      },
+      {
+        "src": "./img/showcase/5777.webp",
+        "alt": "盖内换热组件",
+        "label": "盖内换热组件"
+      },
+      {
+        "src": "./img/showcase/5806.webp",
+        "alt": "电控装配现场",
+        "label": "电控装配现场"
+      }
+    ],
+    "diagramLabels": [
+      "干冰冷源",
+      "铝制换热鳍片",
+      "PWM 循环风扇",
+      "33 L 储物区",
+      "冷空气",
+      "导热连接",
+      "CO₂ 独立排气"
+    ],
+    "diagramTitle": "冷源、换热与气流示意",
+    "performanceTitle": "性能与运行参数",
+    "performance": [
+      {
+        "label": "箱体容积",
+        "value": "33 L",
+        "detail": "为包装与循环风路留出空间"
+      },
+      {
+        "label": "目标温区",
+        "value": "−25 ~ +10 °C",
+        "detail": "根据货品温度要求设定"
+      },
+      {
+        "label": "温度设定步进",
+        "value": "0.5 °C",
+        "detail": "调节步进，不代表控温精度"
+      },
+      {
+        "label": "温度采样周期",
+        "value": "约 2 s",
+        "detail": "三路测温，取有效读数"
+      },
+      {
+        "label": "保冷续航",
+        "value": "与冷源及热负荷相关",
+        "detail": "以维持目标温区的时长计，小时数尚无记录"
+      },
+      {
+        "label": "电控续航",
+        "value": "与电源容量及功耗相关",
+        "detail": "外部 USB-C PD 供电，小时数尚无记录"
+      },
+      {
+        "label": "降温时间 / 速率",
+        "value": "取决于初温、装载与环境",
+        "detail": "以规定起止温度的耗时及 °C/min 计，尚无记录"
+      },
+      {
+        "label": "换热调节",
+        "value": "PWM + PID",
+        "detail": "单个 120 × 120 mm 风扇"
+      },
+      {
+        "label": "PWM 调节范围",
+        "value": "20–100 %",
+        "detail": "PID 输出范围"
+      },
+      {
+        "label": "CO₂ 监测",
+        "value": "0–5000 ppm",
+        "detail": "≥2000 ppm 持续约 3 s 报警"
+      }
+    ]
+  },
+  "sceneCarousel": {
+    "eyebrow": "产品应用场景",
+    "title": "为不同货品，规划合适的低温旅程。",
+    "body": "高端日料、医疗样本、餐饮与实验室的低温运输场景。按货品温度要求选择方案，医疗与生物样本另需专用包装及运输规范。",
+    "aria": "应用场景图片，可左右滑动",
+    "hint": "左右滑动或等待自动播放",
+    "items": [
+      {
+        "image": "./img/scenes/sushi.webp",
+        "tag": "高端日料",
+        "title": "刺身与海鲜短途配送",
+        "text": "以冷冻海产与高价值食材的低温周转为切入点，按货品要求设定运输温度。"
+      },
+      {
+        "image": "./img/scenes/medical.webp",
+        "tag": "医疗冷链",
+        "title": "样本与温度敏感药物",
+        "text": "针对有冷冻要求的样本规划运输；温区、包装和监测遵循对应样本或药品规范。"
+      },
+      {
+        "image": "./img/scenes/lab.webp",
+        "tag": "生物安全",
+        "title": "实验室样本转运",
+        "text": "实验室样本的包装、标识与冷源分区管理；低温控制不替代生物安全包装。"
+      },
+      {
+        "image": "./img/scenes/restaurant.webp",
+        "tag": "餐饮供应链",
+        "title": "中央厨房与门店交付",
+        "text": "从备餐、分装到门店交付，支持高价值冷食的可控运输。"
+      },
+      {
+        "image": "./img/scenes/dessert.webp",
+        "tag": "冷饮与冷食",
+        "title": "冷冻甜品与即食食品",
+        "text": "面向冷饮、冷冻甜品和精品食材，关注温区稳定与交付体验。"
+      },
+      {
+        "image": "./img/scenes/cold-food.webp",
+        "tag": "冷食配送",
+        "title": "精品冷食与配餐",
+        "text": "根据配餐工艺区分冷藏与冷冻需求，减少交付中的温度波动。"
+      }
+    ],
+    "previous": "上一组",
+    "next": "下一组",
+    "pause": "暂停轮播",
+    "play": "自动轮播"
+  },
+  "newsInfo": {
+    "eyebrow": "新闻资讯",
+    "title": "新闻资讯与冷链知识",
+    "body": "关注真实行业事件，读懂温度管理、食品安全与干冰运输。",
+    "industry": "行业动态",
+    "knowledge": "冷链知识",
+    "faqTitle": "常见问题",
+    "news": [
+      {
+        "date": "2022.11.12",
+        "title": "UNEP 与 FAO 发布可持续食品冷链报告",
+        "summary": "报告指出，全球约 14% 的供人类食用食品在供应链中损失；更高效、可持续的冷链有助于减少损耗并提升食品安全。",
+        "source": "UNEP / FAO",
+        "url": "https://www.unep.org/resources/report/sustainable-food-cold-chains-opportunities-challenges-and-way-forward",
+        "category": "industry",
+        "image": "./img/news/vaccine-logger.webp"
+      },
+      {
+        "date": "2026.07.14",
+        "title": "CDC：疫苗运输必须维持全程温度控制",
+        "summary": "CDC 更新非紧急疫苗运输指南：采用合适的运输容器、连续温度监测和运输日志，并遵循制造商要求。普通食品保温箱不等于合格疫苗运输容器。",
+        "source": "CDC",
+        "url": "https://www.cdc.gov/vaccines/hcp/storage-handling/transport.html",
+        "category": "industry",
+        "image": "./img/news/vaccine-logger.webp"
+      },
+      {
+        "date": "2026.01.12",
+        "title": "冷链包装正在转向可重复使用与材料减量",
+        "summary": "BioPharma Dive 汇总 Cryopak 的行业资料指出，全球每年进入市场的 EPS 包装约 450–500 万吨，估计仅约 120–150 万吨被回收；这说明一次性泡沫包装的回收仍受收集和物流条件限制。该数字是来源文章的估算，不代表所有地区。",
+        "source": "Cryopak · BioPharma Dive 赞助内容",
+        "url": "https://www.biopharmadive.com/spons/building-more-sustainable-cold-chain-packaging-through-innovation/808687/",
+        "category": "industry",
+        "image": "./img/news/vaccine-logger.webp"
+      },
+      {
+        "date": "2025.11.04",
+        "title": "UNEP 与 IIR 发布三份冷链技术简报",
+        "summary": "国际制冷学会与 UNEP OzonAction 发布渔船制冷、步入式冷库以及商业与家用制冷技术简报，强调降低食品损失、提高能效，并关注制冷剂与泡沫发泡剂的环境影响。",
+        "source": "IIR / UNEP OzonAction",
+        "url": "https://iifiir.org/en/news/press-release-strengthening-cold-chains-unep-and-iir-release-three-technology-briefs-and-announce-webinar-series-2da3c68c-49ad-4d03-b6c6-fa610bd6caa1",
+        "category": "industry",
+        "image": "./img/news/vaccine-logger.webp"
+      },
+      {
+        "date": "2025.03",
+        "title": "聚氨酯回收仍面临材料与阻燃剂限制",
+        "summary": "这篇针对海上应用的系统综述讨论了聚氨酯的机械与化学回收、焚烧及生物降解，指出传统阻燃剂可能增加回收难度。材料组成与报废后的收集处理方式，都是评估保温材料环境影响的重要因素。",
+        "source": "ScienceDirect · Karrech 等",
+        "url": "https://www.sciencedirect.com/science/article/pii/S2773167725000044",
+        "category": "knowledge",
+        "image": "./img/showcase/5787.webp"
+      },
+      {
+        "date": "2024.03.05",
+        "category": "knowledge",
+        "image": "./img/showcase/5787.webp",
+        "source": "FDA",
+        "url": "https://www.fda.gov/food/buy-store-serve-safe-food/selecting-and-serving-fresh-and-frozen-seafood-safely",
+        "title": "海鲜冷链知识：低温之外，还要防止交叉污染",
+        "summary": "FDA 建议生熟海鲜分开处理，装箱前清洁保温箱，并尽量保持箱盖关闭。冷冻不能杀死所有有害微生物，保冷也不能替代食品卫生管理。"
+      },
+      {
+        "date": "知识卡",
+        "category": "knowledge",
+        "image": "./img/showcase/5787.webp",
+        "source": "CK Supply · 干冰知识",
+        "url": "https://cksupply.com/the-environmental-impact-of-dry-ice-a-closer-look/",
+        "title": "为什么在部分冷冻运输中使用干冰？",
+        "summary": "干冰在约 −78.5 °C 升华，不像水冰那样留下融水，因此可减少潮湿、融水污染和部分一次性冰袋的使用场景；它更适合需要低温或避免液态残留的货品。干冰不是所有食品、药品或样本的通用方案，包装兼容性、通风和货品温度规范必须单独确认。"
+      },
+      {
+        "date": "知识卡",
+        "category": "knowledge",
+        "image": "./img/showcase/5787.webp",
+        "source": "CK Supply · 供应商资料",
+        "url": "https://cksupply.com/the-environmental-impact-of-dry-ice-a-closer-look/",
+        "title": "干冰与环保：减少耗材，不等于零碳",
+        "summary": "干冰可利用氨合成、乙醇生产等工业过程捕集的 CO₂，升华后不留下融水；适当替代一次性冷源并采用可重复使用箱体，有助于减少部分耗材。干冰是冷源，EPS、PU 和真空隔热板是保温材料，两者不能直接等同替代。捕集的 CO₂ 最终仍会释放，实际环境表现需结合制备能耗、运输、耗材周转和食品损耗评估。"
+      }
+    ],
+    "faq": [
+      {
+        "q": "为什么食品和医疗样本需要不同的运输管理？",
+        "a": "两类货品的温度范围、包装要求和记录规则不同。ChillLink 页面展示的是通用设备能力，具体路线仍需按货品说明、包装和法规制定方案。"
+      },
+      {
+        "q": "干冰为什么必须配合独立排气？",
+        "a": "干冰升华后形成二氧化碳。独立排气可以让气体不经过食品循环风道；使用环境仍必须保持通风，设备不能替代场所的 CO₂ 安全管理。"
+      },
+      {
+        "q": "−25 至 +10 °C 适合所有货品吗？",
+        "a": "不适合。冷藏与冷冻有不同要求；疫苗、样本及食品应按各自规定选温区。33 L 箱体的可用装载空间还需为包装和循环风路留出余量。"
+      }
+    ],
+    "readSource": "阅读原文"
+  }
+}

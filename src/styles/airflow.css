@@ -1,0 +1,79 @@
+.airflow-section { position: relative; overflow: hidden; padding: 7rem 0 6rem; background: #e6f3f7; color: #102b3a; }
+.airflow-section::before { content: ''; position: absolute; width: 60rem; height: 34rem; left: 43%; top: 19rem; background: radial-gradient(ellipse,rgba(115,210,240,.25),transparent 67%); pointer-events: none; }
+.airflow-heading { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0,1fr) minmax(17rem,.72fr); gap: 4rem; align-items: end; margin-bottom: 2.4rem; }
+.airflow-heading .eyebrow { color: #168ec2; }
+.airflow-heading h2 { max-width: 12ch; margin-top: .65rem; font-size: clamp(2.2rem,4vw,4rem); line-height: 1.07; letter-spacing: -.045em; }
+.airflow-heading > p { max-width: 42ch; justify-self: end; color: #52717e; font-size: .98rem; line-height: 1.8; }
+.airflow-toolbar { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .7rem .9rem; margin-bottom: 1rem; border: 1px solid rgba(24,77,98,.15); border-radius: 14px; background: rgba(247,253,255,.72); box-shadow: 0 10px 34px rgba(36,97,117,.06); backdrop-filter: blur(14px); }
+.airflow-filters, .airflow-playback, .airflow-fan-modes { display: flex; align-items: center; gap: .35rem; }
+.airflow-filters button { display: inline-flex; align-items: center; gap: .42rem; min-height: 34px; padding: .45rem .7rem; border: 1px solid transparent; border-radius: 8px; color: #52717e; font-size: .75rem; }
+.airflow-filters button[aria-pressed='true'] { background: #164b61; color: #ecfbff; box-shadow: 0 4px 12px rgba(22,75,97,.18); }
+.airflow-fan-modes { gap: .3rem; padding: .2rem; border: 1px solid rgba(24,77,98,.12); border-radius: 9px; background: rgba(255,255,255,.38); }
+.airflow-fan-modes button { min-height: 30px; padding: .35rem .55rem; border: 1px solid transparent; border-radius: 7px; color: #52717e; font-size: .7rem; }
+.airflow-fan-modes button[aria-pressed='true'] { background: #d9f3fb; border-color: #79c8df; color: #164b61; box-shadow: 0 3px 10px rgba(22,75,97,.1); }
+.airflow-swatch { display: inline-block; width: .52rem; height: .52rem; border-radius: 50%; background: #168ec2; box-shadow: 0 0 0 3px rgba(22,142,194,.13); }
+.airflow-swatch.warm { background: #dc8147; box-shadow: 0 0 0 3px rgba(220,129,71,.13); }
+.airflow-swatch.all { background: linear-gradient(135deg,#49b9e4 50%,#e08c53 50%); }
+.airflow-playback { gap: .8rem; }
+.airflow-playback label { display: flex; align-items: center; gap: .55rem; color: #66818d; font-size: .68rem; }
+.airflow-playback input { width: 90px; accent-color: #168ec2; }
+.airflow-playback output { width: 2.2rem; color: #168ec2; font: .68rem ui-monospace,monospace; }
+.airflow-play { display: inline-flex; align-items: center; gap: .35rem; min-height: 34px; padding: .45rem .7rem; border: 1px solid rgba(24,77,98,.18); border-radius: 8px; color: #164b61; font-size: .72rem; }
+.airflow-play svg { width: 15px; height: 15px; }
+.airflow-play:disabled { opacity: .45; cursor: default; }
+.airflow-panels { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0,1.16fr) minmax(0,.84fr); gap: 1rem; }
+.airflow-volume-panel, .airflow-plane-panel { min-width: 0; overflow: hidden; border: 1px solid rgba(180,220,233,.16); border-radius: 22px; background: #103041; box-shadow: 0 20px 45px rgba(22,67,84,.13); }
+.airflow-plane-panel { background: rgba(248,253,255,.83); border-color: rgba(54,121,143,.16); box-shadow: 0 20px 45px rgba(38,91,105,.07); }
+.airflow-panel-title { display: flex; justify-content: space-between; align-items: center; padding: 1.3rem 1.45rem .7rem; color: #d9f3fb; }
+.airflow-plane-panel .airflow-panel-title { color: #173c4d; }
+.airflow-panel-title > div { display: flex; align-items: center; gap: .58rem; }
+.airflow-panel-title h3 { font-size: 1rem; font-weight: 550; }
+.airflow-panel-title span { font: .62rem ui-monospace,monospace; letter-spacing: .12em; color: #8fc8d9; }
+.airflow-plane-panel .airflow-panel-title span { color: #5892a4; }
+.airflow-live-dot { width: .42rem; height: .42rem; border-radius: 100%; background: #5be0aa; box-shadow: 0 0 0 4px rgba(91,224,170,.13); }
+.airflow-section-tag { padding: .28rem .45rem; border: 1px solid rgba(80,145,165,.22); border-radius: 5px; }
+.airflow-reset { width: 31px; height: 31px; border: 1px solid rgba(184,225,238,.21); border-radius: 8px; color: #a8d9e8; font-size: 1.2rem; line-height: 1; }
+.airflow-reset:hover { border-color: #77cbe5; color: #e4faff; }
+.airflow-volume-stage { position: relative; height: clamp(390px,37vw,540px); margin: 0 .45rem; overflow: hidden; border-radius: 16px; background: radial-gradient(ellipse at 50% 52%,#1b5268 0%,#123949 42%,#0d2936 100%); }
+.airflow-stage-glow { position: absolute; inset: 12% 17%; background: radial-gradient(ellipse,rgba(98,206,242,.22),transparent 65%); filter: blur(24px); pointer-events: none; }
+.airflow-3d-host, .airflow-3d-host canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.airflow-volume-stage .airflow-diagram { display: none; }
+.airflow-cutaway-badge { position: absolute; left: 1.2rem; bottom: 1.1rem; padding: .4rem .55rem; border: 1px solid rgba(156,221,239,.25); border-radius: 5px; color: #9bddec; background: rgba(8,36,49,.35); font: .56rem ui-monospace,monospace; letter-spacing: .1em; }
+.airflow-orbit-hint { padding: .6rem 1.35rem .95rem; color: #82adbb; font-size: .68rem; text-align: center; }
+.airflow-plane-panel .airflow-diagram { display: block; width: 100%; height: auto; padding: .1rem .45rem 0; }
+.airflow-svg-label { fill: #234f61; font: 600 12px system-ui,sans-serif; }
+.airflow-svg-label.small { font-size: 10px; fill: #4b7584; }
+.airflow-svg-label.cold { fill: #168ec2; }.airflow-svg-label.warm { fill: #de7b40; }
+.airflow-svg-kicker { fill: #7a9aa6; font: 500 9px ui-monospace,monospace; letter-spacing: .16em; }
+.airflow-leader { fill: none; stroke: #8daab5; stroke-width: 1; stroke-dasharray: 2 3; }
+.airflow-stream path { transition: opacity .3s ease; }.airflow-stream.cold path { stroke: #3ba8d7; }.airflow-stream.warm path { stroke: #e08c53; }
+.airflow-phase-key { display: flex; gap: 1rem; align-items: center; padding: .1rem 1.4rem 1.2rem; color: #547787; font-size: .7rem; }.airflow-phase-key span { display: inline-flex; align-items: center; gap: .45rem; }
+.airflow-plane-panel .airflow-swatch { width: .44rem; height: .44rem; box-shadow: none; }
+.airflow-fallback { position: absolute; inset: 0; padding: .5rem; background: #11384a; }.airflow-fallback .airflow-diagram { height: 100%; }.airflow-fallback p { position: absolute; left: 1rem; right: 1rem; bottom: .7rem; color: #aed3dd; font-size: .68rem; text-align: center; }
+.airflow-loading { position: absolute; inset: 0; display: grid; place-items: center; color: #86bccb; font: .72rem ui-monospace,monospace; }
+.airflow-sequence { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; margin-top: 1rem; }
+.airflow-step { position: relative; display: grid; grid-template-columns: auto 1fr auto; gap: .9rem; align-items: start; min-height: 140px; padding: 1.2rem 1.2rem 1.1rem; border-top: 1px solid rgba(36,101,122,.24); background: rgba(247,253,255,.43); }
+.airflow-step-number { color: #168ec2; font: .68rem ui-monospace,monospace; }.airflow-step h3 { margin: -.12rem 0 .45rem; font-size: .95rem; font-weight: 600; }.airflow-step p { color: #5a7885; font-size: .77rem; line-height: 1.65; }.airflow-step-arrow { color: #168ec2; font-size: 1.1rem; align-self: end; justify-self: end; }
+.airflow-step.exchange { background: rgba(246,185,123,.10); border-color: rgba(224,140,83,.3); }.airflow-step.exchange .airflow-step-number,.airflow-step.exchange .airflow-step-arrow { color: #de7b40; }
+.airflow-footnote { display: flex; justify-content: space-between; gap: 2rem; align-items: center; margin-top: 1.6rem; padding: 1rem 1.1rem; border-left: 2px solid #68cdea; background: rgba(255,255,255,.45); }.airflow-footnote p { color: #5e7c87; font-size: .72rem; line-height: 1.65; }.airflow-footnote a { flex: none; color: #168ec2; font-size: .75rem; text-decoration: none; }.airflow-footnote a::after { display: none; }
+@media(max-width: 900px) { .airflow-heading { grid-template-columns: 1fr; gap: 1.2rem; }.airflow-heading > p { justify-self: start; }.airflow-panels { grid-template-columns: 1fr; }.airflow-volume-stage { height: min(520px,68vw); min-height: 370px; }.airflow-sequence { grid-template-columns: 1fr; }.airflow-step { min-height: unset; } }
+@media(max-width: 620px) { .airflow-section { padding: 5rem 0 4rem; }.airflow-toolbar { align-items: stretch; flex-direction: column; }.airflow-filters, .airflow-fan-modes { justify-content: space-between; }.airflow-filters button { flex: 1; justify-content: center; }.airflow-playback { justify-content: space-between; }.airflow-playback label { flex: 1; }.airflow-volume-stage { height: 370px; min-height: 0; }.airflow-footnote { align-items: flex-start; flex-direction: column; gap: .7rem; }.airflow-panel-title { padding-inline: 1rem; }.airflow-plane-panel .airflow-diagram { padding-inline: 0; }.airflow-phase-key { padding-inline: 1rem; } }
+
+.airflow-section { scroll-margin-top: 4.2rem; }
+.airflow-heading h2 { max-width: none; font-size: clamp(2rem,3.8vw,3.4rem); line-height: 1.18; }
+.airflow-panels { grid-template-columns: minmax(0,1.08fr) minmax(0,1fr); }
+.airflow-plane-panel { display: flex; flex-direction: column; }
+.airflow-plane-panel .airflow-diagram { flex: 1; min-height: 0; }
+.airflow-fallback .airflow-diagram { display: block; width: 100%; height: calc(100% - 2.8rem); }
+.airflow-svg-stream { transition: opacity .3s ease; }
+.airflow-footnote p { max-width: none; }
+@media(max-width:900px) { .airflow-panels { grid-template-columns: 1fr; } .airflow-plane-panel .airflow-diagram { flex: none; } }
+@media(max-width:620px) { .airflow-filters button { padding: .45rem .35rem; font-size: .67rem; } .airflow-heading { gap: 1rem; } }
+@media(max-width:620px) {
+  .airflow-playback { flex-wrap: wrap; }
+  .airflow-playback label { min-width: 0; }
+  .airflow-playback label span { max-width: 6.4rem; overflow-wrap: anywhere; }
+  .airflow-playback input { min-width: 45px; max-width: 80px; }
+  .airflow-orbit-hint .viewer-hint-desktop { display: none; }
+  .airflow-orbit-hint .viewer-hint-touch { display: inline; }
+}

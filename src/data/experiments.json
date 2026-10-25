@@ -1,0 +1,9 @@
+{
+  "updatedAt": null,
+  "source": "",
+  "groups": [
+    { "id": "A", "label": { "zh-CN": "普通冰袋", "en": "Ice pack" }, "series": [] },
+    { "id": "B", "label": { "zh-CN": "干冰直放", "en": "Loose dry ice" }, "series": [] },
+    { "id": "C", "label": { "zh-CN": "ChillLink Effi-Chillcrate X1", "en": "Effi-Chillcrate X1" }, "series": [] }
+  ]
+}
