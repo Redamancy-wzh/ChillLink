@@ -19,7 +19,8 @@
     "company": "Company",
     "contact": "Contact",
     "airflow": "Airflow",
-    "specifications": "Specifications"
+    "specifications": "Specifications",
+    "packages": "Packages"
   },
   "hero": {
     "title": "Cold, under control.",
@@ -255,7 +256,31 @@
       "Always-open primary vent plus an always-open backup; venting continues with power off or fan stopped",
       "The ePTFE membrane only keeps out dust and splashes; the dry-ice chamber is never a pressure vessel",
       "Sensor range 0–5000 ppm; ≥ 2000 ppm for about 3 s raises the alarm"
-    ]
+    ],
+    "instructions": {
+      "title": "Safety instructions and incident response",
+      "intro": "Do not wait for an alarm if anyone feels unwell. The on-page slider is a simulation, not a live environmental reading.",
+      "items": [
+        {
+          "title": "Before loading dry ice",
+          "body": "Wear insulated dry-ice gloves and eye protection; use tongs. Work in a well-ventilated location, away from children. Do not use in sealed vehicles or small enclosed rooms."
+        },
+        {
+          "title": "During use: keep gas paths open",
+          "body": "Never seal the dry-ice chamber or block either vent. Keep outlets away from faces. Check for frost and obstructions; an alarm sensor cannot make a poorly ventilated space safe."
+        },
+        {
+          "title": "Alarm, dizziness or breathing trouble",
+          "body": "Stop handling and leave immediately for fresh air; alert others. Ventilate only from a safe location. Do not enter a confined space to retrieve equipment or rescue someone. Call local emergency services (120/119 in mainland China) for breathing difficulty, collapse or suspected CO₂ exposure."
+        },
+        {
+          "title": "Cold burns and restarting",
+          "body": "For cold burns, avoid rubbing or direct heat; gently warm the area in lukewarm water and seek medical care. Resume only after the space is ventilated, an appropriate detector confirms conditions, and vent or sensor faults have been corrected. A cleared device alarm alone is insufficient."
+        }
+      ],
+      "sourceLabel": "Handling reference: CDC dry-ice safety guidance",
+      "sourceUrl": "https://www.cdc.gov/vaccines/hcp/admin/storage/downloads/emergency-transport.pdf"
+    }
   },
   "compare": {
     "title": "Choose the cold-chain solution that fits your cargo.",
@@ -313,8 +338,8 @@
     "x": "Time (minutes)",
     "y": "Box temperature",
     "costTitle": "Consumables cost per delivery",
-    "costSub": "33 L reference · CNY · single-use packaging included",
-    "costNote": "Cost includes single-use packaging and coolant for this delivery. Reusable equipment depreciation, labor, freight, pre-cooling electricity and returns are excluded. Ice-pack quantity n and examples are for arithmetic only, not a validated 33 L configuration. Temperature ranges, loads and durations differ; this is not an equivalent-performance or total operating-cost comparison.",
+    "costSub": "Coolant only; reusable boxes are excluded from per-trip pricing",
+    "costNote": "Cost basis: coolant used for this delivery only. The box is treated as reusable equipment and excluded from the per-trip price. Labor, freight, pre-cooling electricity, equipment depreciation and returns are excluded. Conditions differ, so this is not an equivalent-performance or total operating-cost comparison. Ice-pack examples do not establish cooling performance or per-use cost for reused packs.",
     "iceLink": "1688 ice-pack price reference ↗",
     "series": [
       "EPS · no ice",
@@ -325,29 +350,19 @@
     ],
     "costRows": [
       [
-        "EPS box · no coolant",
-        "Approx. ¥9 / trip",
-        "A single-use 33 L box at the team’s reference purchase price. Insulation only, with no coolant."
-      ],
-      [
-        "EPS box + water ice",
-        "Approx. ¥24–29 / trip",
-        "Single-use 33 L EPS box ¥9 + 2.5 kg water ice ¥15–20, using team-supplied prices."
-      ],
-      [
-        "Reusable cooler + water ice",
+        "Water ice · 2.5 kg",
         "Approx. ¥15–20 / trip",
-        "Reuse a 33 L PU/EPP box; only 2.5 kg purchased water ice is counted. Box purchase and return logistics are separate."
+        "Team reference price for purchased water ice. Reusable box excluded."
       ],
       [
-        "EPS box + gel packs",
-        "¥9 + ¥0.60 × n",
-        "Nantong Baolun gel-pack listing on 1688: ¥0.60, provisionally treated as per pack. n is packs per delivery. Confirm specification and quantity; 5 packs would total about ¥12 including the box."
+        "Gel ice packs",
+        "¥0.60 × n",
+        "1688 listing, provisionally per pack. n is packs used; 5 packs = ¥3, 10 packs = ¥6. Specification, reuse and required quantity need confirmation."
       ],
       [
-        "ChillLink + 0.5 kg dry ice",
-        "Budget: approx. ¥3 / trip",
-        "Team budget. ¥18 / 6 kg = ¥3/kg, so 0.5 kg dry ice costs ¥1.50 in material. The remaining budget has not been itemized."
+        "ChillLink · 500 g dry ice",
+        "Material: ¥1.50 / trip",
+        "Team reference: ¥18 / 6 kg = ¥3/kg. 600 g costs ¥1.80; 800 g costs ¥2.40. Coolant only; package prices remain TBD."
       ]
     ]
   },
@@ -405,8 +420,8 @@
         },
         {
           "name": "Control tests",
-          "items": "Thermo-hygrometer 45, dry ice 60, ice packs 30, insulated bags 35, foam box 40, test samples 60",
-          "amount": 270
+          "items": "Thermometer 45, dry ice 60, ice packs 30, insulated bag 35, test samples 60",
+          "amount": 230
         },
         {
           "name": "Safety & presentation",
@@ -414,7 +429,8 @@
           "amount": 120
         }
       ],
-      "note": "Only prototype materials are costed so far. Unit cost, pricing and revenue model will follow once prototype costs and user interviews are in."
+      "note": "Only prototype materials are costed so far. Unit cost, pricing and revenue model will follow once prototype costs and user interviews are in.",
+      "totalAmount": 900
     }
   },
   "team": {
@@ -983,5 +999,52 @@
       "sashimi": "Salmon & tuna sashimi",
       "wagyu": "Wagyu marbling tray"
     }
+  },
+  "packagePlans": {
+    "eyebrow": "PACKAGE OPTIONS",
+    "title": "Three configurations, pricing to follow",
+    "intro": "The box, fan and dry-ice options are defined first; pricing will follow prototype, procurement and test confirmation.",
+    "headers": {
+      "plan": "Plan",
+      "volume": "Box volume",
+      "fans": "Fans",
+      "dryIce": "Dry ice",
+      "price": "Price"
+    },
+    "items": [
+      {
+        "name": "1",
+        "volume": "33 L",
+        "fans": "1 fan",
+        "dryIce": "500 g",
+        "price": "TBD"
+      },
+      {
+        "name": "2",
+        "volume": "40 L",
+        "fans": "1 fan",
+        "dryIce": "600 g",
+        "price": "TBD"
+      },
+      {
+        "name": "3",
+        "volume": "50 L",
+        "fans": "2 fans",
+        "dryIce": "800 g",
+        "price": "TBD"
+      }
+    ],
+    "note": "The box is treated as reusable equipment and is excluded from per-trip consumables; package pricing awaits procurement and testing."
+  },
+  "safetySummary": {
+    "eyebrow": "SAFETY FIRST",
+    "title": "Ventilation and clear vents come first",
+    "body": "Dry ice releases carbon dioxide as it sublimates. Use it in a ventilated place, keep vents clear, and stop, leave and ventilate if an alarm or symptoms occur.",
+    "link": "View the full safety boundary",
+    "actions": [
+      "Wear cryogenic gloves and eye protection; never touch dry ice bare-handed.",
+      "Never seal dry ice in a container or block the primary and backup vents.",
+      "If CO₂ alarms or anyone feels dizzy or short of breath: stop, leave, move to fresh air and contact the site lead."
+    ]
   }
 }

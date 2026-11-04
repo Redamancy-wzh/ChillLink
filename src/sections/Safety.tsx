@@ -71,6 +71,15 @@ export default function Safety() {
           <p className="section-heading-copy">{t('safety.body')}</p>
         </div>
 
+        <div className="safety-instructions">
+          <h3>{t('safety.instructions.title')}</h3>
+          <p className="safety-instructions-intro">{t('safety.instructions.intro')}</p>
+          <ol>{(t('safety.instructions.items', { returnObjects: true }) as { title: string; body: string }[]).map((item, index) => (
+            <li key={item.title}><span className="safety-instructions-number">0{index + 1}</span><div><h4>{item.title}</h4><p>{item.body}</p></div></li>
+          ))}</ol>
+          <a className="text-link" href={t('safety.instructions.sourceUrl')} target="_blank" rel="noreferrer">{t('safety.instructions.sourceLabel')} ↗</a>
+        </div>
+
         <div className="safety-grid safety-grid--alarm">
           <div className="safety-console">
             <div className="safety-console-head"><span className="eyebrow">CO₂ / ALARM</span><h3>{t('safety.co2.title')}</h3></div>

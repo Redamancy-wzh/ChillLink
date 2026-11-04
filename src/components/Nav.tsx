@@ -15,6 +15,7 @@ const LANG_NAMES: Record<string, string> = {
 
 export default function Nav() {
   const { t, i18n } = useTranslation()
+  const zh = i18n.language.startsWith('zh')
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const menuButton = useRef<HTMLButtonElement>(null)
@@ -50,30 +51,33 @@ export default function Nav() {
   return (
     <nav className={`site-nav ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="content-wrap nav-inner">
-        <a href="#main" className="nav-brand !no-underline" onClick={() => setOpen(false)}>
+        <a href="#/" className="nav-brand !no-underline" onClick={() => setOpen(false)}>
           <Logo />
         </a>
         <button ref={menuButton} type="button" className="nav-menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="site-navigation" aria-label={t('nav.menu')}>
           <span /> <span />
         </button>
         <div id="site-navigation" className={`nav-links ${open ? 'is-open' : ''}`}>
+          <a href="#/" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
+            {zh ? '首页' : 'Home'}
+          </a>
           <a href="#model" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
             {t('nav.product')}
           </a>
           <a href="#solutions" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
             {t('nav.solutions')}
           </a>
-          <a href="#technology" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
-            {t('nav.technology')}
+          <a href="#package-plans" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
+            {t('nav.packages')}
           </a>
-          <a href="#control" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
-            {t('nav.control')}
+          <a href="#/technology" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
+            {zh ? '技术与安全' : 'Technology'}
           </a>
-          <a href="#safety" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
+          <a href="#safety-summary" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
             {t('nav.safety')}
           </a>
-          <a href="#team" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
-            {t('nav.company')}
+          <a href="#/about" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
+            {zh ? '团队与动态' : 'Team & News'}
           </a>
           <a href="#contact" onClick={() => setOpen(false)} className="nav-contact-link text-sm hover:text-cryo transition-colors">
             {t('nav.contact')}

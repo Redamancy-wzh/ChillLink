@@ -1,3 +1,19 @@
+/* 2026-10-29 multi-page: sub-page header + home "explore more" cards */
+.page-header { padding-top: calc(var(--section-space, 48px) + 64px); padding-bottom: 8px; }
+.page-header h1 { font-size: clamp(2rem, 4.5vw, 3.4rem); font-weight: 700; letter-spacing: -.02em; margin: 10px 0 8px; color: var(--abyss); }
+.page-header p { max-width: 46ch; opacity: .7; }
+.page-back { font-size: .85rem; opacity: .65; text-decoration: none; }
+.page-back:hover { opacity: 1; }
+.explore-more { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding-block: var(--section-space, 48px); }
+.explore-card { display: flex; flex-direction: column; gap: 10px; padding: 28px; border-radius: 20px; text-decoration: none; color: inherit;
+  border: 1px solid rgba(0,0,0,.08); background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.4));
+  transition: transform .25s ease, box-shadow .25s ease; }
+.explore-card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(0,0,0,.08); }
+.explore-card h3 { font-size: 1.4rem; font-weight: 650; }
+.explore-card p { opacity: .7; flex: 1; }
+.explore-card span { font-weight: 600; color: var(--cryo, #2a8bd8); }
+.nav-links a.is-active { color: var(--cryo, #2a8bd8); }
+
 /* 2026-10-25 refinement pass: neumorphic switches, cargo loader, merged "how it works" chapter,
    rebuilt safety diagram, unified control panel. Loaded after layout.css. */
 
@@ -170,6 +186,15 @@
 .safety-co2 .caption { margin-top: 8px; font-size: .72rem; line-height: 1.65; }
 .safety-warning { margin-top: 20px; padding: 12px 16px; border-left: 3px solid var(--signal); background: rgba(255,248,243,.8); border-radius: 0 12px 12px 0; font-size: .82rem; line-height: 1.7; }
 .safety-warning span { color: var(--ink-60); }
+.safety-instructions { margin-bottom: 36px; padding: clamp(20px, 3vw, 32px); border: 1px solid #dcc9b9; border-radius: 18px; background: #fffaf5; }
+.safety-instructions > h3 { font-size: 1.35rem; font-weight: 650; }
+.safety-instructions-intro { margin-top: 10px; color: #855029; font-size: .9rem; }
+.safety-instructions ol { list-style: none; padding: 0; margin: 24px 0 8px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 36px; }
+.safety-instructions li { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: 12px; }
+.safety-instructions-number { font-size: .75rem; color: #a34d1c; padding-top: 4px; }
+.safety-instructions h4 { font-weight: 650; line-height: 1.6; }
+.safety-instructions li p { margin-top: 8px; color: var(--ink-60); font-size: .86rem; line-height: 1.85; }
+@media (max-width: 767px) { .safety-instructions ol { grid-template-columns: 1fr; } }
 
 .path-diagram { display: block; width: 100%; height: auto; }
 .pd-label { font: 600 12px var(--font-sans); fill: #2a4a5a; }

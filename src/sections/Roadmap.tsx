@@ -176,8 +176,8 @@ function BudgetBar() {
       <div className="relative h-12 bg-line rounded-lg overflow-hidden">
         {budget.categories.map((cat: any, i: number) => {
           const prevSum = budget.categories.slice(0, i).reduce((s: number, c: any) => s + c.amount, 0)
-          const widthPct = (cat.amount / 940) * 100
-          const leftPct = (prevSum / 940) * 100
+          const widthPct = (cat.amount / budget.totalAmount) * 100
+          const leftPct = (prevSum / budget.totalAmount) * 100
           return (
             <div
               key={i}
@@ -204,7 +204,7 @@ function BudgetBar() {
         ))}
       </div>
       <div className="text-right font-mono text-xl font-semibold border-t border-line pt-4">
-        {budget.total}: ¥940
+        {budget.total}: ¥{budget.totalAmount}
       </div>
     </div>
   )
