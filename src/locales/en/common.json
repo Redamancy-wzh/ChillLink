@@ -477,19 +477,31 @@
         "name": "梁欣悦",
         "english": "Joyce",
         "role": "CEO",
-        "body": "Team leader with strong presentation and persuasive communication skills."
+        "body": "G10 · 上海中学国际部"
       },
       {
         "name": "陈泽宇",
         "english": "James",
         "role": "CRO",
-        "body": "Leads data analysis and research, with a strong sense of the market."
+        "body": "G11 · 上海市文琦汇点中学"
       },
       {
         "name": "陈姿贝",
         "english": "Zibei",
         "role": "CTO",
-        "body": "Leads technology design, website development and the internal electrical system."
+        "body": "G11 · 西南学院"
+      },
+      {
+        "name": "伏若凡",
+        "english": "Annie",
+        "role": "CFO",
+        "body": "G11 · 成都外国语学校"
+      },
+      {
+        "name": "何雨萱",
+        "english": "Katie",
+        "role": "CMO",
+        "body": "G11 · 领科双语学校"
       }
     ]
   },
