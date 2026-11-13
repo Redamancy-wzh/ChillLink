@@ -16,14 +16,8 @@ function detectLanguage() {
   if (url && LANG_ORDER.includes(url)) return url
   const stored = localStorage.getItem('cryodrive-lang')
   if (stored && LANG_ORDER.includes(stored)) return stored
-  const nav = navigator.language || navigator.languages?.[0]
-  if (nav) {
-    if (LANG_ORDER.includes(nav)) return nav
-    const prefix = nav.split('-')[0]
-    const match = LANG_ORDER.find(l => l.startsWith(prefix))
-    if (match) return match
-  }
-  return 'zh-CN'
+  // 默认英文：不再按浏览器语言自动切换
+  return 'en'
 }
 
 void i18n.use(initReactI18next).init({
