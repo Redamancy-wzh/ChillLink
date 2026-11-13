@@ -9,7 +9,6 @@ const CATEGORY_ICONS: Record<CargoCategory, JSX.Element> = {
   dining: <path d="M4 15h16M5 15c0-4 3-7 7-7s7 3 7 7M12 8V6M3 18h18" />,
   drinks: <path d="M9 3h6M10 3v4l-2 3v10h8V10l-2-3V3M8 13h8" />,
   dessert: <path d="M7 11h10l-2 10H9L7 11ZM6 11a6 6 0 0 1 12 0M12 5V3" />,
-  medical: <path d="M8 3h8v4H8zM7 7h10v14H7zM12 11v6M9 14h6" />,
 }
 
 export default function ProductViewer({ variant = 'hero' }: { variant?: 'hero' | 'studio' }) {

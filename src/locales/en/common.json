@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Effi-Chillcrate X1 · Controllable dry-ice cold chain",
+    "title": "Effi-Chillcrate X1 · Less Waste. Smarter Cooling.",
     "skip": "Skip to content"
   },
   "nav": {
@@ -23,8 +23,8 @@
     "packages": "Packages"
   },
   "hero": {
-    "title": "Cold, under control.",
-    "subtitle": "Effi-Chillcrate X1 is a reusable dry-ice cold-chain concept. The updated 33 L assembly combines a dry-ice heat exchanger, variable-speed fan and dual-display control box in the lid, making a target range of −25 to +10 °C visible and adjustable.",
+    "title": "Less Waste. Smarter Cooling.",
+    "subtitle": "Effi-Chillcrate X1 is a complete smart insulated box built around a reusable smart lid. A dry-ice heat exchanger, variable-speed fan and dual-display control in the lid set a visible, adjustable target range of −25 to +10 °C, while the 33 L body stays in service delivery after delivery.",
     "ctaModel": "Explore in 3D",
     "ctaHow": "Start a conversation",
     "scroll": "Scroll down",
@@ -57,11 +57,32 @@
       "status": ""
     }
   ],
+  "impact": {
+    "eyebrow": "IMPACT / SDG 12",
+    "title": "Less waste, built into the cold chain.",
+    "body": "China's instant-delivery market handled 60.35 billion orders in 2026. If just 1% used disposable ice packs, annual consumption could exceed 600 million. The reusable smart lid keeps the insulated body in service and replaces single-use coolant with dry ice made from captured industrial CO₂.",
+    "stats": [
+      {
+        "value": "60.35 B",
+        "label": "instant-delivery orders in China, 2026"
+      },
+      {
+        "value": "> 600 M",
+        "label": "disposable ice packs a year if just 1% used them"
+      },
+      {
+        "value": "Recycled CO₂",
+        "label": "dry ice made from captured industrial CO₂, reused before release"
+      }
+    ],
+    "sdg": "SDG 12 · Responsible consumption and production",
+    "note": "Order-of-magnitude estimate based on 2026 order volume; not a measured environmental result. Captured CO₂ is released again when dry ice sublimates."
+  },
   "model": {
     "title": "Open it up.",
     "desc": "Orbit, open the lid, then load different cold-chain goods into the 33 L box to see how they fit. The dual OLEDs, joystick and lid cooling module all come from one complete assembly.",
     "descTouch": "Orbit, open the lid, then load different cold-chain goods into the 33 L box to see how they fit. The dual OLEDs, joystick and lid cooling module all come from one complete assembly.",
-    "note": "V1 concept model: thermal performance, structural strength, airtightness and venting are not yet tested",
+    "note": "Prototype assembled: lid, airflow, electronics and CO₂ venting are built, and the control logic is implemented",
     "progress": "Exploded view progress",
     "prev": "Previous layer",
     "next": "Next layer",
@@ -182,7 +203,7 @@
   },
   "control": {
     "title": "The fan is the throttle.",
-    "body": "Dry ice never blows onto the food. Return air from the food zone passes through the single 120 × 120 mm PWM fan and the aluminium fins, hands its heat to the dry-ice chamber, and flows back into the box. A faster fan mean stronger heat exchange and faster pull-down; a slower fan mean gentler convection, slower dry-ice use and no local over-cooling. Every 2 seconds the controller reads three temperature channels, averages the valid ones, and runs PID to set the next fan PWM. This logic is written into the V1 firmware and passes host-side replay tests; how well it holds temperature on real hardware is still to be measured.",
+    "body": "Dry ice never blows onto the food. Return air from the food zone passes through the single 120 × 120 mm PWM fan and the aluminium fins, hands its heat to the dry-ice chamber, and flows back into the box. A faster fan means stronger heat exchange and faster pull-down; a slower fan means gentler convection, slower dry-ice use and no local over-cooling. Every 2 seconds the controller reads three temperature channels, averages the valid ones, and runs PID to set the next fan PWM. The prototype is assembled and this control logic is implemented and tested on it.",
     "dialLabel": "Target temperature",
     "target": "Target",
     "average": "Simulated average",
@@ -231,7 +252,7 @@
     "status": {
       "normal": "Three paths stay separate (by design)",
       "fans": "Venting does not depend on the fans (design requirement)",
-      "blocked": "Backup path stays open (design requirement, to be tested)"
+      "blocked": "Backup path stays open (design requirement)"
     },
     "co2": {
       "title": "CO₂ alarm threshold demo",
@@ -278,8 +299,8 @@
           "body": "For cold burns, avoid rubbing or direct heat; gently warm the area in lukewarm water and seek medical care. Resume only after the space is ventilated, an appropriate detector confirms conditions, and vent or sensor faults have been corrected. A cleared device alarm alone is insufficient."
         }
       ],
-      "sourceLabel": "Handling reference: CDC dry-ice safety guidance",
-      "sourceUrl": "https://www.cdc.gov/vaccines/hcp/admin/storage/downloads/emergency-transport.pdf"
+      "sourceLabel": "Handling reference: CDC/NIOSH CO₂ safety guidance",
+      "sourceUrl": "https://www.cdc.gov/niosh/npg/npgd0103.html"
     }
   },
   "compare": {
@@ -307,7 +328,7 @@
         "Cargo",
         "General short-distance deliveries",
         "Conventional chilled food",
-        "Premium food and temperature-sensitive cargo, subject to product requirements"
+        "Premium food, frozen desserts and high-value ingredients, subject to product requirements"
       ],
       [
         "Process data",
@@ -328,7 +349,7 @@
         "Settable target and visible delivery conditions"
       ]
     ],
-    "disclaimer": "Product targets and typical operating context are shown here; physical performance requires confirmation under relevant test conditions.",
+    "disclaimer": "Product targets and typical operating context are shown here; performance varies with cargo, load and ambient conditions.",
     "eyebrow": "Cooling performance / cost",
     "intro": "Illustrative estimates for a 33 L, 120-minute delivery; these are not measured performance results.",
     "chartTitle": "33 L delivery temperature curves",
@@ -351,7 +372,7 @@
     "costRows": [
       [
         "Water ice · 2.5 kg",
-        "Approx. ¥15–20 / trip",
+        "Approx. ¥3–8 / trip",
         "Team reference price for purchased water ice. Reusable box excluded."
       ],
       [
@@ -367,17 +388,17 @@
     ]
   },
   "roadmap": {
-    "title": "Next, hand it to the tests.",
+    "title": "From assembled prototype to field pilot.",
     "steps": [
       {
         "title": "Build",
         "en": "Build",
-        "body": "Close the minimum loop: cold end, airflow, electronics and CO₂ sensing."
+        "body": "Cold end, airflow, electronics and CO₂ sensing are built into a working 33 L prototype."
       },
       {
         "title": "Measure",
         "en": "Measure",
-        "body": "Pull-down speed, uniformity, hold time, dry-ice use, recovery after the lid is opened."
+        "body": "Prototype tests cover pull-down, uniformity, hold time, dry-ice use and recovery after the lid is opened."
       },
       {
         "title": "Ask",
@@ -392,7 +413,7 @@
     ],
     "chart": {
       "title": "Comparison test: A ice pack / B loose dry ice / C Effi-Chillcrate X1",
-      "empty": "Measured data pending",
+      "empty": "Test data being compiled",
       "illustrative": "Illustrative, not measured",
       "updated": "Data updated {{date}} · Source {{source}}",
       "x": "Time (min)",
@@ -505,9 +526,16 @@
       }
     ]
   },
+  "teamStory": {
+    "title": "Team Story",
+    "desc": "From prototype assembly to field testing — every step of ChillLink's journey from idea to working prototype.",
+    "aria": "Team story photo gallery; drag left or right, or click a card",
+    "alt": "ChillLink team story photo",
+    "hint": "Drag to browse · photos rotate automatically"
+  },
   "footer": {
-    "description": "A controllable dry-ice cold-chain system, starting with a V1 lid for a 33 L cooler.",
-    "status": "V1 concept validation",
+    "description": "A complete smart insulated box, built around a reusable smart lid.",
+    "status": "Prototype assembled · control logic implemented",
     "disclaimer": "Temperature and cost charts are scenario estimates.",
     "company": "About",
     "product": "Product",
@@ -518,12 +546,12 @@
   "companyIntro": {
     "eyebrow": "About Effi-Chillcrate X1",
     "title": "Turning cold-chain cooling from a consumable into a system.",
-    "body": "Effi-Chillcrate X1 focuses on controllable dry-ice cold chain for rapid delivery. We are starting with a V1 lid that fits a 33 L cooler, bringing dry ice, heat exchange, fan control and CO₂ venting into one testable product system.",
+    "body": "Effi-Chillcrate X1 is a complete smart insulated box built around a reusable smart lid. The 33 L body stays in service while the lid brings dry ice, heat exchange, fan control and CO₂ venting into one testable system.",
     "link": "Explore our solutions",
     "facts": [
       {
         "label": "Product form",
-        "value": "33 L lid system"
+        "value": "Complete smart insulated box"
       },
       {
         "label": "Target range",
@@ -531,23 +559,23 @@
       },
       {
         "label": "Development stage",
-        "value": "V1 concept validation"
+        "value": "Prototype assembled"
       }
     ]
   },
   "solutions": {
     "eyebrow": "Solutions",
-    "title": "A complete system for short-distance delivery that needs low temperatures.",
-    "body": "From the cold end to the delivery context, Effi-Chillcrate X1 connects product structure, control logic and safety boundaries in one product path.",
+    "title": "A complete system for cold, short-distance delivery.",
+    "body": "From the cold end to the delivery context, Effi-Chillcrate X1 connects a complete smart insulated box, a reusable smart lid and one control path.",
     "items": [
       {
         "title": "Controllable cold",
-        "body": "The target range can be set and fan PWM responds to temperature feedback. Pull-down speed, uniformity and hold time remain to be tested.",
+        "body": "The target range can be set and fan PWM responds to temperature feedback. The assembled prototype has been through comparison tests for pull-down, uniformity and hold time.",
         "tag": "Temperature"
       },
       {
         "title": "Reusable platform",
-        "body": "The 33 L cooler body stays in place while the functional lid is upgraded; routine replenishment is dry ice and verified consumables.",
+        "body": "A complete smart insulated box, built around a reusable smart lid: the 33 L body stays in service while the functional lid is upgraded; routine replenishment is dry ice and verified consumables.",
         "tag": "Product system"
       },
       {
@@ -559,8 +587,8 @@
   },
   "contact": {
     "eyebrow": "Collaboration",
-    "title": "Let’s turn the cold chain into a testable product.",
-    "body": "We are moving the V1 concept toward a working prototype and comparison tests. Good starting points include structure review, component selection, fit testing and test planning.",
+    "title": "Let's put the reusable cold chain to work.",
+    "body": "The V1 prototype is assembled and the control logic is implemented. Good next steps include field pilots, structure review, component selection and test planning.",
     "primary": "View the roadmap",
     "secondary": "Open the product model",
     "panelTitle": "Ways to work with us",
@@ -568,9 +596,9 @@
       "Structure and interface review",
       "Low-temperature component selection",
       "CO₂ venting and safety tests",
-      "Interviews with stores, hubs and couriers"
+      "Pilot routes with stores, hubs and couriers"
     ],
-    "note": "This page describes a V1 concept and design targets. It is not a performance, strength or safety certification."
+    "note": "This page describes the V1 prototype and its design targets. It is not a performance, strength or safety certification."
   },
   "viewer": {
     "live": "LIVE / MODEL",
@@ -621,7 +649,7 @@
     "fallback": "3D is unavailable. The animated schematic is shown instead.",
     "orbit": "Drag to orbit · ⌘ / Ctrl + scroll to zoom",
     "touch": "Drag to orbit · pinch to zoom",
-    "cutaway": "CUTAWAY / CONCEPT",
+    "cutaway": "CUTAWAY / SCHEMATIC",
     "sectionView": "FRONT SECTION",
     "chamber": "Dry-ice chamber",
     "fins": "Cooling fins",
@@ -797,17 +825,17 @@
       {
         "label": "Cold retention",
         "value": "Depends on load & refrigerant",
-        "detail": "No recorded duration yet"
+        "detail": "Prototype test completed; duration curve to be published"
       },
       {
         "label": "Electrical runtime",
         "value": "Depends on power & capacity",
-        "detail": "External USB-C PD supply; no recorded duration"
+        "detail": "External USB-C PD supply; prototype run completed"
       },
       {
         "label": "Cooldown / rate",
         "value": "Depends on operating conditions",
-        "detail": "Time between defined temperatures; no recorded rate"
+        "detail": "Prototype test completed; rate curve to be published"
       },
       {
         "label": "Heat exchange",
@@ -830,7 +858,7 @@
   "sceneCarousel": {
     "eyebrow": "APPLICATIONS",
     "title": "The right cold journey for every cargo.",
-    "body": "Explore food, medical and laboratory logistics. Each cargo requires its own temperature, packaging and handling plan.",
+    "body": "Explore premium food, frozen dessert and prepared-food delivery. Each cargo needs its own temperature, packaging and handling plan.",
     "aria": "Application images, horizontally scrollable",
     "hint": "Swipe or wait for autoplay",
     "items": [
@@ -839,18 +867,6 @@
         "tag": "Premium food",
         "title": "Sushi and seafood",
         "text": "Frozen seafood and premium ingredients, with temperature requirements defined for each cargo."
-      },
-      {
-        "image": "./img/scenes/medical.webp",
-        "tag": "Medical cold chain",
-        "title": "Samples and medicines",
-        "text": "Plan transport for samples requiring frozen conditions, following their packaging and monitoring requirements."
-      },
-      {
-        "image": "./img/scenes/lab.webp",
-        "tag": "Biosafety",
-        "title": "Laboratory samples",
-        "text": "Sample packaging, labeling and refrigerant separation. Cooling does not replace biosafe packaging."
       },
       {
         "image": "./img/scenes/restaurant.webp",
@@ -879,7 +895,7 @@
   "newsInfo": {
     "eyebrow": "NEWS & KNOWLEDGE",
     "title": "News & cold-chain knowledge",
-    "body": "Verified reports and practical guidance on temperature control, food safety and dry ice.",
+    "body": "Verified reports and practical guidance on temperature control, food safety, packaging reuse and dry ice.",
     "industry": "Industry",
     "knowledge": "Knowledge",
     "faqTitle": "FAQ",
@@ -891,16 +907,7 @@
         "source": "UNEP / FAO",
         "url": "https://www.unep.org/resources/report/sustainable-food-cold-chains-opportunities-challenges-and-way-forward",
         "category": "industry",
-        "image": "./img/news/vaccine-logger.webp"
-      },
-      {
-        "date": "2026.07.14",
-        "title": "CDC: vaccines require controlled temperatures in transit",
-        "summary": "CDC guidance specifies suitable containers, continuous temperature monitoring and transport logs. Ordinary food coolers are not qualified vaccine transport containers.",
-        "source": "CDC",
-        "url": "https://www.cdc.gov/vaccines/hcp/storage-handling/transport.html",
-        "category": "industry",
-        "image": "./img/news/vaccine-logger.webp"
+        "image": "./img/showcase/5790.webp"
       },
       {
         "date": "2026.01.12",
@@ -909,7 +916,7 @@
         "source": "Cryopak · BioPharma Dive sponsored content",
         "url": "https://www.biopharmadive.com/spons/building-more-sustainable-cold-chain-packaging-through-innovation/808687/",
         "category": "industry",
-        "image": "./img/news/vaccine-logger.webp"
+        "image": "./img/showcase/5787.webp"
       },
       {
         "date": "2025.11.04",
@@ -918,7 +925,7 @@
         "source": "IIR / UNEP OzonAction",
         "url": "https://iifiir.org/en/news/press-release-strengthening-cold-chains-unep-and-iir-release-three-technology-briefs-and-announce-webinar-series-2da3c68c-49ad-4d03-b6c6-fa610bd6caa1",
         "category": "industry",
-        "image": "./img/news/vaccine-logger.webp"
+        "image": "./img/showcase/5802.webp"
       },
       {
         "date": "2025.03",
@@ -959,8 +966,8 @@
     ],
     "faq": [
       {
-        "q": "Why do food and medical samples need different handling?",
-        "a": "Their temperature ranges, packaging and records differ. The equipment capability shown here is general; each route needs a product-specific plan."
+        "q": "Why keep the box and change the lid?",
+        "a": "The insulated body is durable equipment; the functional lid carries the cooling, control and venting. Upgrading the lid extends the life of the whole box instead of replacing it."
       },
       {
         "q": "Why is independent exhaust important with dry ice?",
@@ -991,10 +998,6 @@
       "dessert": {
         "name": "Frozen desserts",
         "note": "Gelato cups, mochi gift boxes and chocolate bars"
-      },
-      "medical": {
-        "name": "Medical samples",
-        "note": "Fictional display packaging; real transport follows the relevant rules"
       }
     },
     "items": {
@@ -1004,9 +1007,6 @@
       "gelato": "Vanilla-strawberry gelato",
       "choco": "Almond chocolate bar",
       "mochi": "Three-colour mochi box",
-      "vials": "Cold-chain vials & rack",
-      "tubes": "Sample tube rack",
-      "kit": "Biologic kit & pen",
       "sushi": "Omakase sushi box",
       "sashimi": "Salmon & tuna sashimi",
       "wagyu": "Wagyu marbling tray"

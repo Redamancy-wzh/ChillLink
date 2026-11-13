@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 
 const base = import.meta.env.BASE_URL
 
@@ -34,6 +35,7 @@ function predecode(file: string) {
 }
 
 export default function TeamStory() {
+  const { t } = useTranslation()
   const [orderedPhotos, setOrderedPhotos] = useState(photos)
   const dragStart = useRef<number | null>(null)
   const stackRef = useRef<HTMLDivElement>(null)
@@ -96,10 +98,10 @@ export default function TeamStory() {
   return <section id="team-story" className="field-gallery-section">
     <div className="content-wrap">
       <div className="section-heading section-heading-wide field-gallery-heading">
-        <div><p className="eyebrow">TEAM STORY</p><h2>团队故事</h2></div>
-        <p className="section-heading-copy">从样机装配到现场测试，记录 ChillLink 从想法走向可用原型的每一步。</p>
+        <div><p className="eyebrow">TEAM STORY</p><h2>{t('teamStory.title')}</h2></div>
+        <p className="section-heading-copy">{t('teamStory.desc')}</p>
       </div>
-      <div ref={stackRef} className="photo-stack" aria-label="团队故事照片展览，可用鼠标左右划动或点击卡片" onPointerEnter={e => { if (e.pointerType === 'mouse') setPaused(true) }} onPointerLeave={() => setPaused(false)} onPointerDown={handlePointerDown} onPointerUp={handlePointerUp} onPointerCancel={() => { dragStart.current = null }}>
+      <div ref={stackRef} className="photo-stack" aria-label={t('teamStory.aria')} onPointerEnter={e => { if (e.pointerType === 'mouse') setPaused(true) }} onPointerLeave={() => setPaused(false)} onPointerDown={handlePointerDown} onPointerUp={handlePointerUp} onPointerCancel={() => { dragStart.current = null }}>
         {orderedPhotos.slice(0, slots.length).map((file, index) => {
           const slot = slots[index]
           return <figure
@@ -109,11 +111,11 @@ export default function TeamStory() {
             style={{ '--x': slot.x, '--y': slot.y, '--w': `${slot.w}%`, '--wm': `${slot.wm}%`, '--r': `${slot.r}deg`, '--z': slot.z, '--stack-index': index } as React.CSSProperties}
             onClick={(e) => handleCardClick(e, index)}
           >
-          <img src={photoSrc(file)} alt="ChillLink 团队故事照片" loading={index < 4 ? 'eager' : 'lazy'} decoding="async" draggable={false} />
+          <img src={photoSrc(file)} alt={t('teamStory.alt')} loading={index < 4 ? 'eager' : 'lazy'} decoding="async" draggable={false} />
           </figure>
         })}
       </div>
-      <p className="photo-stack-hint">左右拖动浏览 · 照片持续轮换</p>
+      <p className="photo-stack-hint">{t('teamStory.hint')}</p>
     </div>
   </section>
 }

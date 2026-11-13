@@ -14,15 +14,17 @@ export default function Hero() {
 
   const isCJK = i18n.language.startsWith('zh') || i18n.language === 'ja' || i18n.language === 'ko'
   const title = t('hero.title')
-  const titleLines = i18n.language.startsWith('zh') ? title.split('，') : [title]
+  const titleLines = isCJK
+    ? title.split(/(?<=[，。])/).filter(Boolean)
+    : title.split(/(?<=\.)\s+/).filter(Boolean)
 
   return (
     <section className="hero-section">
       <div className="content-wrap hero-grid">
         <div className="hero-copy">
           <p className="eyebrow">{t('hero.eyebrow')}</p>
-          <h1 className="display">{titleLines.map((line, index) => <span className="hero-title-line" key={index}>{line}{index < titleLines.length - 1 ? '，' : ''}</span>)}</h1>
-          {isCJK && <p className="hero-tagline">Cold, under control.</p>}
+          <h1 className="display">{titleLines.map((line, index) => <span className="hero-title-line" key={index}>{line}</span>)}</h1>
+          {isCJK && <p className="hero-tagline">Less Waste. Smarter Cooling.</p>}
           <p className="lede">{t('hero.subtitle')}</p>
           <div className="hero-actions">
             <a href="#model" className="button-primary">

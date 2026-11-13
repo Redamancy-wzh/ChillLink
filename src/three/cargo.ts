@@ -10,9 +10,9 @@
  */
 export type CargoId =
   | 'yuzu' | 'matcha' | 'juice' | 'gelato' | 'choco' | 'mochi'
-  | 'vials' | 'tubes' | 'kit' | 'sushi' | 'sashimi' | 'wagyu'
+  | 'sushi' | 'sashimi' | 'wagyu'
 
-export type CargoCategory = 'dining' | 'drinks' | 'dessert' | 'medical'
+export type CargoCategory = 'dining' | 'drinks' | 'dessert'
 
 export interface CargoItem {
   id: CargoId
@@ -33,9 +33,6 @@ export const CARGO_ITEMS: Record<CargoId, CargoItem> = {
   gelato: { id: 'gelato', file: '04_Gelato_Cup.glb', size: [88.6, 87, 145] },
   choco: { id: 'choco', file: '05_Chocolate_Bar.glb', size: [47, 22.5, 135] },
   mochi: { id: 'mochi', file: '06_Mochi_Gift.glb', size: [168, 70, 43.3] },
-  vials: { id: 'vials', file: '07_Coldchain_Vials.glb', size: [94, 66.3, 66.5] },
-  tubes: { id: 'tubes', file: '08_Sample_Tubes.glb', size: [93, 64.4, 98] },
-  kit: { id: 'kit', file: '09_Biologic_Kit.glb', size: [142, 92, 50.3] },
   sushi: { id: 'sushi', file: '10_Omakase_Sushi.glb', size: [190, 126, 46.6] },
   sashimi: { id: 'sashimi', file: '11_Sashimi_Selection.glb', size: [192, 126, 41.1] },
   wagyu: { id: 'wagyu', file: '12_Wagyu_Tray.glb', size: [184, 120, 39.1] },
@@ -63,20 +60,15 @@ export const CARGO_LAYOUTS: Record<CargoCategory, Partial<Record<CargoId, Placem
     // Bars lie flat (rotated about X) in front of the gift boxes.
     choco: [-0.072, -0.024, 0.024, 0.072].map(x => [x, -0.03, 0, 0.0125, QUARTER] as Placement),
   },
-  medical: {
-    kit: [[-0.13, -0.05], [-0.13, 0.05]],
-    vials: [[0.005, -0.04], [0.005, 0.038]],
-    tubes: [[0.135, -0.04], [0.135, 0.038]],
-  },
 }
 
-export const CARGO_CATEGORIES: CargoCategory[] = ['dining', 'drinks', 'dessert', 'medical']
+export const CARGO_CATEGORIES: CargoCategory[] = ['dining', 'drinks', 'dessert']
 
 /** Items a category shows, in display order. */
 export const categoryItems = (category: CargoCategory) => Object.keys(CARGO_LAYOUTS[category]) as CargoId[]
 
 /** Display set-point suggested for each load (inside the −25 … +10 °C target range). */
-export const CARGO_SETPOINT: Record<CargoCategory, number> = { dining: -18, drinks: 4, dessert: -18, medical: 5 }
+export const CARGO_SETPOINT: Record<CargoCategory, number> = { dining: -18, drinks: 4, dessert: -18 }
 
 export interface CargoRequest {
   category: CargoCategory | null

@@ -5,6 +5,7 @@ import { syncLangToDOM } from './i18n'
 import Nav from './components/Nav'
 import Hero from './sections/Hero'
 import Specs from './sections/Specs'
+import Impact from './sections/Impact'
 import Model from './sections/Model'
 import Control from './sections/Control'
 import Safety from './sections/Safety'
@@ -125,6 +126,7 @@ export default function App() {
         {page === 'home' && <>
           <Hero />
           <Specs />
+          <Impact />
           <Solutions />
           <Model />
           <SafetySummary />
