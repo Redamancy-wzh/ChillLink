@@ -1,24 +1,46 @@
 import { useTranslation } from 'react-i18next'
 
 type DownloadItem = {
-  key: 'manual' | 'datasheet'
+  key: 'manual-zh' | 'manual-en' | 'datasheet-zh' | 'datasheet-en'
   href: string
-  type: string
-  meta: string
+  kickerKey: 'manualKicker' | 'datasheetKicker'
+  titleKey: 'manualTitle' | 'manualTitleEn' | 'datasheetTitle' | 'datasheetTitleEn'
+  metaKey: 'metaManual' | 'metaDatasheet'
+  langKey: 'langZh' | 'langEn'
 }
 
 const ITEMS: DownloadItem[] = [
   {
-    key: 'manual',
-    href: './downloads/Chill-Crate-X1_Manual_V1.0_zh-CN.docx',
-    type: 'DOCX',
-    meta: 'Word · V1.0 · 2026-11 · 0.6 MB',
+    key: 'manual-zh',
+    href: './downloads/Chill-Crate-X1_Manual_V1.0_zh-CN.pdf',
+    kickerKey: 'manualKicker',
+    titleKey: 'manualTitle',
+    metaKey: 'metaManual',
+    langKey: 'langZh',
   },
   {
-    key: 'datasheet',
+    key: 'manual-en',
+    href: './downloads/Chill-Crate-X1_Manual_V1.0_en.pdf',
+    kickerKey: 'manualKicker',
+    titleKey: 'manualTitleEn',
+    metaKey: 'metaManual',
+    langKey: 'langEn',
+  },
+  {
+    key: 'datasheet-zh',
     href: './downloads/Chill-Crate-X1_Datasheet_V1.0_zh-CN.pdf',
-    type: 'PDF',
-    meta: 'PDF · V1.0 · 2026-11 · 0.6 MB',
+    kickerKey: 'datasheetKicker',
+    titleKey: 'datasheetTitle',
+    metaKey: 'metaDatasheet',
+    langKey: 'langZh',
+  },
+  {
+    key: 'datasheet-en',
+    href: './downloads/Chill-Crate-X1_Datasheet_V1.0_en.pdf',
+    kickerKey: 'datasheetKicker',
+    titleKey: 'datasheetTitleEn',
+    metaKey: 'metaDatasheet',
+    langKey: 'langEn',
   },
 ]
 
@@ -43,14 +65,17 @@ export default function Downloads() {
               className="download-card"
               href={item.href}
               download
-              aria-label={`${t(`downloads.${item.key}Title`)} — ${t('downloads.download')}`}
+              aria-label={`${t(`downloads.${item.titleKey}`)} — ${t('downloads.download')}`}
             >
-              <span className="download-type">{item.type}</span>
+              <span className="download-type">PDF</span>
               <span className="download-copy">
-                <span className="download-kicker">{t(`downloads.${item.key}Kicker`)}</span>
-                <span className="download-title">{t(`downloads.${item.key}Title`)}</span>
+                <span className="download-kicker">
+                  {t(`downloads.${item.kickerKey}`)}
+                  <span className="download-lang">{t(`downloads.${item.langKey}`)}</span>
+                </span>
+                <span className="download-title">{t(`downloads.${item.titleKey}`)}</span>
                 <span className="download-desc">{t(`downloads.${item.key}Desc`)}</span>
-                <span className="download-meta">{item.meta}</span>
+                <span className="download-meta">{t(`downloads.${item.metaKey}`)}</span>
               </span>
               <span className="download-arrow" aria-hidden="true">↓</span>
             </a>

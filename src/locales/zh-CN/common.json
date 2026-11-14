@@ -1063,7 +1063,7 @@
   "downloads": {
     "eyebrow": "资料下载",
     "title": "把完整资料带走。",
-    "body": "使用说明书与技术参数表，面向客户、配送伙伴与合作伙伴开放下载。",
+    "body": "使用说明书与技术参数表，提供中文与 English 两种版本。",
     "manualKicker": "使用说明书",
     "manualTitle": "Chill Crate X1 使用说明书",
     "manualDesc": "安全须知、装冰步骤、开机设定、报警处理、清洁维护与售后信息。",
@@ -1073,6 +1073,16 @@
     "word": "Word 文档",
     "pdf": "PDF 文档",
     "download": "点击下载",
-    "note": "参数为样机设计口径，实际性能以测试与交付配置为准。"
+    "note": "参数为样机设计口径，实际性能以测试与交付配置为准。",
+    "manualTitleEn": "Chill Crate X1 Instruction Manual",
+    "datasheetTitleEn": "Chill Crate X1 Technical Datasheet",
+    "langZh": "中文",
+    "langEn": "English",
+    "metaManual": "PDF · V1.0 · 2026-11 · 10 页",
+    "metaDatasheet": "PDF · V1.0 · 2026-11 · 1 页",
+    "manual-zhDesc": "安全须知、装冰步骤、开机设定、报警处理、清洁维护与售后信息。",
+    "manual-enDesc": "English edition of the operation manual: safety, loading, start-up, alarms, care, and service.",
+    "datasheet-zhDesc": "一页式技术资料：三视图、详细参数、型号配置与安全边界。",
+    "datasheet-enDesc": "One-page English datasheet: three views, specifications, configuration, and safety boundaries."
   }
 }

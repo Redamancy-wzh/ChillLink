@@ -1063,7 +1063,7 @@
   "downloads": {
     "eyebrow": "DOWNLOADS",
     "title": "Take the full documentation with you.",
-    "body": "The instruction manual and technical datasheet are available for customers, delivery partners and collaborators.",
+    "body": "The instruction manual and technical datasheet are available in Chinese and English.",
     "manualKicker": "OPERATING MANUAL",
     "manualTitle": "Chill Crate X1 Instruction Manual",
     "manualDesc": "Safety, dry-ice loading, start-up, temperature setting, alarm handling, cleaning and after-sales.",
@@ -1073,6 +1073,16 @@
     "word": "Word document",
     "pdf": "PDF document",
     "download": "Download",
-    "note": "Specifications are prototype design targets; actual performance is subject to testing and delivery configuration."
+    "note": "Specifications are prototype design targets; actual performance is subject to testing and delivery configuration.",
+    "manualTitleEn": "Chill Crate X1 Instruction Manual",
+    "datasheetTitleEn": "Chill Crate X1 Technical Datasheet",
+    "langZh": "中文",
+    "langEn": "English",
+    "metaManual": "PDF · V1.0 · 2026-11 · 10 pages",
+    "metaDatasheet": "PDF · V1.0 · 2026-11 · 1 page",
+    "manual-zhDesc": "Chinese edition of the operation manual: safety, loading, start-up, alarms, care, and service.",
+    "manual-enDesc": "English edition of the operation manual: safety, loading, start-up, alarms, care, and service.",
+    "datasheet-zhDesc": "One-page Chinese datasheet: three views, specifications, configuration, and safety boundaries.",
+    "datasheet-enDesc": "One-page English datasheet: three views, specifications, configuration, and safety boundaries."
   }
 }
