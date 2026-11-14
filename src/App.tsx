@@ -18,6 +18,7 @@ import Team from './sections/Team'
 import TeamStory from './sections/TeamStory'
 import PackagePlans from './sections/PackagePlans'
 import SafetySummary from './sections/SafetySummary'
+import Downloads from './sections/Downloads'
 import { usePage, PAGE_HASH } from './router'
 
 /** 分页文案：站点只发布 zh-CN / en，其余语言回落英文 */
@@ -90,6 +91,7 @@ function Footer() {
             <a href="#scene-carousel">{t('sceneCarousel.eyebrow')}</a>
             <a href="#technology">{t('nav.technology')}</a>
             <a href="#safety">{t('safety.instructions.title')}</a>
+            <a href="#downloads">{t('nav.downloads')}</a>
             <a href="#news-info">{t('newsInfo.eyebrow')}</a>
           </div>
           <div>
@@ -130,6 +132,7 @@ export default function App() {
           <Solutions />
           <Model />
           <SafetySummary />
+          <Downloads />
           <ExploreMore />
         </>}
         {page === 'technology' && <>

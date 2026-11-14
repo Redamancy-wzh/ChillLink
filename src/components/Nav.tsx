@@ -73,6 +73,9 @@ export default function Nav() {
           <a href="#/technology" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
             {zh ? '技术与安全' : 'Technology'}
           </a>
+          <a href="#downloads" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
+            {t('nav.downloads')}
+          </a>
           <a href="#safety-summary" onClick={() => setOpen(false)} className="text-sm hover:text-cryo transition-colors">
             {t('nav.safety')}
           </a>

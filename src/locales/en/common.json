@@ -20,7 +20,8 @@
     "contact": "Contact",
     "airflow": "Airflow",
     "specifications": "Specifications",
-    "packages": "Packages"
+    "packages": "Packages",
+    "downloads": "Downloads"
   },
   "hero": {
     "title": "Less Waste. Smarter Cooling.",
@@ -1058,5 +1059,20 @@
       "Never seal dry ice in a container or block the primary and backup vents.",
       "If CO₂ alarms or anyone feels dizzy or short of breath: stop, leave, move to fresh air and contact the site lead."
     ]
+  },
+  "downloads": {
+    "eyebrow": "DOWNLOADS",
+    "title": "Take the full documentation with you.",
+    "body": "The instruction manual and technical datasheet are available for customers, delivery partners and collaborators.",
+    "manualKicker": "OPERATING MANUAL",
+    "manualTitle": "Chill Crate X1 Instruction Manual",
+    "manualDesc": "Safety, dry-ice loading, start-up, temperature setting, alarm handling, cleaning and after-sales.",
+    "datasheetKicker": "TECHNICAL DATASHEET",
+    "datasheetTitle": "Chill Crate X1 Technical Datasheet",
+    "datasheetDesc": "One-page technical reference: three views, specifications, configuration and safety boundaries.",
+    "word": "Word document",
+    "pdf": "PDF document",
+    "download": "Download",
+    "note": "Specifications are prototype design targets; actual performance is subject to testing and delivery configuration."
   }
 }
